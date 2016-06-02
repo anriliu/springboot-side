@@ -1,10 +1,9 @@
 package com.github.yingzhuo.springboot.commons.logging;
 
-import com.github.yingzhuo.springboot.commons.SpringBootCommonsBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class LoggerBeanImpl implements LoggerBean, SpringBootCommonsBean {
+public class LoggerBeanImpl implements LoggerBean {
 
     private Logger logger;
     private LogLevel defaultLevel;

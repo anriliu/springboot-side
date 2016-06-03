@@ -10,6 +10,7 @@ import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.io.support.ResourcePatternResolver;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public final class SpringUtils implements ApplicationContextAware {
@@ -23,11 +24,6 @@ public final class SpringUtils implements ApplicationContextAware {
         } else {
             APPCTX = applicationContext;
         }
-    }
-
-    @FunctionalInterface
-    public static interface CodeBlock {
-        void run();
     }
 
     public static ApplicationContext getApplicationContext() {
@@ -55,12 +51,7 @@ public final class SpringUtils implements ApplicationContextAware {
     }
 
     public static List<String> getActiveProfiles() {
-        return Arrays.asList(getEnvironment().getActiveProfiles());
+        return Collections.unmodifiableList(Arrays.asList(getEnvironment().getActiveProfiles()));
     }
 
-    public static void ifActive(String profile, CodeBlock codeBlock) {
-        if (getActiveProfiles().contains(profile)) {
-            codeBlock.run();
-        }
-    }
 }

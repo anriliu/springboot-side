@@ -12,6 +12,14 @@ public class ProfileValidator implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
+        if (mutualExclusionSet.isEmpty()) {
+            return;
+        }
+
+        if (currentProfiles == null || currentProfiles.isEmpty()) {
+            return;
+        }
+
         for (Set<String> group : mutualExclusionSet) {
             int matched = 0;
             for (String profile : currentProfiles) {

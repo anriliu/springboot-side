@@ -5,7 +5,6 @@ import com.github.yingzhuo.springboot.commons.web.config.AbstractFilterPropertie
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.core.Ordered;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -20,7 +19,7 @@ public class RequestLoggingFilterProperties extends AbstractFilterProperties {
         super.setEnabled(true);
         super.setFilterName(RequestLoggingFilter.class.getSimpleName());
         super.setFilterOrder(Ordered.LOWEST_PRECEDENCE);
-        super.setUrlPatterns(Arrays.asList("/*"));
+        super.setUrlPatterns(new String[] {"/*"});
 
         excludes.add("/**/*.ico");
         excludes.add("/**/*.js");

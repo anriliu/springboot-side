@@ -1,14 +1,13 @@
 package com.github.yingzhuo.springboot.commons.web.config;
 
 import java.io.Serializable;
-import java.util.List;
 
 public abstract class AbstractFilterProperties implements Serializable {
 
     private boolean enabled = true;
     private String filterName;
     private int filterOrder;
-    private List<String> urlPatterns;
+    private String[] urlPatterns;
 
     public boolean isEnabled() {
         return enabled;
@@ -34,11 +33,11 @@ public abstract class AbstractFilterProperties implements Serializable {
         this.filterOrder = filterOrder;
     }
 
-    public List<String> getUrlPatterns() {
+    public String[] getUrlPatterns() {
         return urlPatterns;
     }
 
-    public void setUrlPatterns(List<String> urlPatterns) {
+    public void setUrlPatterns(String[] urlPatterns) {
         this.urlPatterns = urlPatterns;
     }
 }

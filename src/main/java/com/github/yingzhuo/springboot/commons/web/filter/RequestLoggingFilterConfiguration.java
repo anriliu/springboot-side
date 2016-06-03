@@ -25,7 +25,7 @@ public class RequestLoggingFilterConfiguration {
         FilterRegistrationBean bean = new FilterRegistrationBean();
         bean.setFilter(filter);
         bean.setEnabled(properties.isEnabled());
-        bean.addUrlPatterns(properties.getUrlPatterns().toArray(new String[properties.getUrlPatterns().size()]));
+        bean.addUrlPatterns(properties.getUrlPatterns());
         bean.setName(properties.getFilterName());
         bean.setOrder(properties.getFilterOrder());
 

@@ -3,4 +3,5 @@ com.github.yingzhuo.springboot.commons.util.SpringUtilsConfiguration,\
 com.github.yingzhuo.springboot.commons.profile.ProfileValidatorConfiguration,\
 com.github.yingzhuo.springboot.commons.logging.LoggerBeanConfiguration,\
 com.github.yingzhuo.springboot.commons.web.filter.HttpContextHoldingConfiguration,\
-com.github.yingzhuo.springboot.commons.web.filter.RequestLoggingFilterConfiguration
+com.github.yingzhuo.springboot.commons.web.filter.RequestLoggingFilterConfiguration,\
+com.github.yingzhuo.springboot.commons.web.servlet.CaptchaServletConfiguration

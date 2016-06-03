@@ -1,4 +1,5 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
 com.github.yingzhuo.springboot.commons.profile.ProfileValidatorConfiguration,\
 com.github.yingzhuo.springboot.commons.logging.LoggerBeanConfiguration,\
+com.github.yingzhuo.springboot.commons.web.filter.HttpContextHoldingConfiguration,\
 com.github.yingzhuo.springboot.commons.web.filter.RequestLoggingFilterConfiguration

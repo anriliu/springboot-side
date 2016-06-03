@@ -1,7 +1,6 @@
 package com.github.yingzhuo.springboot.commons.web.filter;
 
 import com.github.yingzhuo.springboot.commons.logging.LoggerBeanImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.embedded.FilterRegistrationBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -11,12 +10,8 @@ import org.springframework.context.annotation.Bean;
 @EnableConfigurationProperties(RequestLoggingFilterProperties.class)
 public class RequestLoggingFilterConfiguration {
 
-    @Autowired
-    private RequestLoggingFilterProperties properties;
-
-
     @Bean
-    public FilterRegistrationBean requestLoggingFilter() {
+    public FilterRegistrationBean requestLoggingFilter(RequestLoggingFilterProperties properties) {
 
         RequestLoggingFilter filter = new RequestLoggingFilter();
 
@@ -30,8 +25,9 @@ public class RequestLoggingFilterConfiguration {
         FilterRegistrationBean bean = new FilterRegistrationBean();
         bean.setFilter(filter);
         bean.setEnabled(properties.isEnabled());
-        bean.addUrlPatterns(properties.getUrlPattern());
-        bean.setName(properties.getName());
+        bean.addUrlPatterns(properties.getUrlPatterns().toArray(new String[properties.getUrlPatterns().size()]));
+        bean.setName(properties.getFilterName());
+        bean.setOrder(properties.getFilterOrder());
 
         return bean;
     }

@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.github.yingzhuo</groupId>
-    <artifactId>springboot-commons</artifactId>
+    <artifactId>springboot-side</artifactId>
     <version>1.0.0</version>
 
     <properties>
@@ -58,6 +58,7 @@
     </dependencies>
 
     <build>
+        <finalName>${project.artifactId}</finalName>
         <resources>
             <resource>
                 <directory>src/main/resources</directory>

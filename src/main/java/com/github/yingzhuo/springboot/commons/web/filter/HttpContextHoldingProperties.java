@@ -4,7 +4,7 @@ import com.github.yingzhuo.springboot.commons.web.config.AbstractFilterPropertie
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.core.Ordered;
 
-@ConfigurationProperties(prefix = "springboot.commons.http-context-holding-filter")
+@ConfigurationProperties(prefix = "springboot.side.http-context-holding-filter")
 public class HttpContextHoldingProperties extends AbstractFilterProperties {
 
     public HttpContextHoldingProperties() {

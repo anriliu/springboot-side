@@ -6,7 +6,7 @@ import org.springframework.boot.context.embedded.FilterRegistrationBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 
-@ConditionalOnProperty(prefix = "springboot.commons.request-logging-filter", name = "enabled", havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(prefix = "springboot.side.request-logging-filter", name = "enabled", havingValue = "true", matchIfMissing = true)
 @EnableConfigurationProperties(RequestLoggingFilterProperties.class)
 public class RequestLoggingFilterConfiguration {
 

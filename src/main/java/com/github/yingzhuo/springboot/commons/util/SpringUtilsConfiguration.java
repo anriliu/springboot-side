@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Bean;
 @ConditionalOnMissingBean(SpringUtils.class)
 public class SpringUtilsConfiguration {
 
-    @Bean(name = "__spring_utils__")
+    @Bean(name = "springUtils")
     public SpringUtils springUtils() {
         return new SpringUtils();
     }

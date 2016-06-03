@@ -12,7 +12,7 @@ import java.util.Collection;
 import java.util.HashSet;
 
 @ConditionalOnMissingBean(ProfileValidator.class)
-@ConditionalOnProperty(prefix = "springboot.commons.profile-validator", name = "enabled", havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(prefix = "springboot.side.profile-validator", name = "enabled", havingValue = "true", matchIfMissing = true)
 @EnableConfigurationProperties(ProfileValidatorProperties.class)
 public class ProfileValidatorConfiguration {
 

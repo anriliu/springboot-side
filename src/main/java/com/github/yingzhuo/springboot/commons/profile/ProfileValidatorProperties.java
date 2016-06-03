@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-@ConfigurationProperties(prefix = "springboot.commons.profile-validator")
+@ConfigurationProperties(prefix = "springboot.side.profile-validator")
 public class ProfileValidatorProperties {
 
     private boolean enabled = true;

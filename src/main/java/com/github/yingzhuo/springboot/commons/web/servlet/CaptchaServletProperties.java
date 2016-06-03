@@ -4,7 +4,7 @@ package com.github.yingzhuo.springboot.commons.web.servlet;
 import com.github.yingzhuo.springboot.commons.web.config.AbstractServletProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-@ConfigurationProperties(prefix = "springboot.commons.captcha-servlet")
+@ConfigurationProperties(prefix = "springboot.side.captcha-servlet")
 public class CaptchaServletProperties extends AbstractServletProperties {
 
     private boolean enabled = false;

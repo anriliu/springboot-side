@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Bean;
 
 @ConditionalOnClass(Logger.class)
 @ConditionalOnMissingBean(LoggerBean.class)
-@ConditionalOnProperty(prefix = "springboot.commons.logger-bean", name = "enabled", havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(prefix = "springboot.side.logger-bean", name = "enabled", havingValue = "true", matchIfMissing = true)
 @EnableConfigurationProperties(LoggerBeanProperties.class)
 public class LoggerBeanConfiguration {
 

@@ -8,7 +8,7 @@ import org.springframework.core.Ordered;
 import java.util.HashSet;
 import java.util.Set;
 
-@ConfigurationProperties(prefix = "springboot.commons.request-logging-filter")
+@ConfigurationProperties(prefix = "springboot.side.request-logging-filter")
 public class RequestLoggingFilterProperties extends AbstractFilterProperties {
 
     private Set<String> excludes = new HashSet<>();

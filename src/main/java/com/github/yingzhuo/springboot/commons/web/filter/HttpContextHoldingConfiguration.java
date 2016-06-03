@@ -6,7 +6,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 
 @EnableConfigurationProperties(HttpContextHoldingProperties.class)
-@ConditionalOnProperty(prefix = "springboot.commons.http-context-holding-filter", name = "enabled", havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(prefix = "springboot.side.http-context-holding-filter", name = "enabled", havingValue = "true", matchIfMissing = true)
 public class HttpContextHoldingConfiguration {
 
 

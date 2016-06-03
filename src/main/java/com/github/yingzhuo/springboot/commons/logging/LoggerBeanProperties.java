@@ -4,7 +4,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.io.Serializable;
 
-@ConfigurationProperties(prefix = "springboot.commons.logger-bean")
+@ConfigurationProperties(prefix = "springboot.side.logger-bean")
 public class LoggerBeanProperties implements Serializable {
 
     private boolean enabled = true;

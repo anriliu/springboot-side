@@ -6,7 +6,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 
 @EnableConfigurationProperties(CaptchaServletProperties.class)
-@ConditionalOnProperty(prefix = "springboot.commons.captcha-servlet", name = "enabled", havingValue = "true", matchIfMissing = false)
+@ConditionalOnProperty(prefix = "springboot.side.captcha-servlet", name = "enabled", havingValue = "true", matchIfMissing = false)
 public class CaptchaServletConfiguration {
 
     @Bean

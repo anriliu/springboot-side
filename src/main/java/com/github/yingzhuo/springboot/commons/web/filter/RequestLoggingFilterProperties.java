@@ -1,8 +1,8 @@
 package com.github.yingzhuo.springboot.commons.web.filter;
 
-import com.github.yingzhuo.springboot.commons.logging.LogLevel;
 import com.github.yingzhuo.springboot.commons.web.config.AbstractFilterProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.logging.LogLevel;
 import org.springframework.core.Ordered;
 
 import java.util.HashSet;

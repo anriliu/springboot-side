@@ -1,6 +1,7 @@
 package com.github.yingzhuo.springboot.commons.logging;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.logging.LogLevel;
 
 import java.io.Serializable;
 

@@ -1,5 +1,7 @@
 package com.github.yingzhuo.springboot.commons.logging;
 
+import org.springframework.boot.logging.LogLevel;
+
 /**
  * 日志记录组件
  */

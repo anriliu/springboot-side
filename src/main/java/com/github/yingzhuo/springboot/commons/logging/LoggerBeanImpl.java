@@ -2,6 +2,7 @@ package com.github.yingzhuo.springboot.commons.logging;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.logging.LogLevel;
 
 public class LoggerBeanImpl implements LoggerBean {
 
@@ -15,6 +16,9 @@ public class LoggerBeanImpl implements LoggerBean {
 
     public void log(LogLevel level, String format, Object... args) {
         switch (level) {
+            case OFF:
+                break;
+
             case TRACE:
                 logger.trace(format, args);
                 break;

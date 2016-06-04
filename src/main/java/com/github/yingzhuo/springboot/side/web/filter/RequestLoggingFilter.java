@@ -21,6 +21,8 @@ public class RequestLoggingFilter extends OncePerRequestFilter {
 
     private LoggerBean loggerBean;
 
+    private static final String BARS = StringUtils.repeat('=', 60);
+
     private final PathMatcher pathMatcher = new AntPathMatcher();
     private final Set<String> excludes = new HashSet<>();
 
@@ -37,7 +39,7 @@ public class RequestLoggingFilter extends OncePerRequestFilter {
 
     private void doLog(HttpServletRequest request) {
         String uri = request.getRequestURI();
-        loggerBean.log("===========================================================");
+        loggerBean.log(BARS);
         loggerBean.log("[URI]: ");
         loggerBean.log("\t\t\t{}", request.getRequestURI());
 
@@ -52,7 +54,7 @@ public class RequestLoggingFilter extends OncePerRequestFilter {
         while (headerNames.hasMoreElements()) {
             String name = headerNames.nextElement();
             String value = request.getHeader(name);
-            loggerBean.log("\t\t\t{} = {}", name, name.equalsIgnoreCase("cookie") ? StringUtils.abbreviate(value, 40) : value);
+            loggerBean.log("\t\t\t{} = {}", name, name.equalsIgnoreCase("cookie") ? StringUtils.abbreviate(value, 60) : value);
         }
 
         loggerBean.log("[PARAMS]: ");
@@ -63,7 +65,7 @@ public class RequestLoggingFilter extends OncePerRequestFilter {
             loggerBean.log("\t\t\t{} = {}", name, value);
         }
 
-        loggerBean.log("===========================================================");
+        loggerBean.log(BARS);
     }
 
     public RequestLoggingFilter addExcludePattern(String pattern) {

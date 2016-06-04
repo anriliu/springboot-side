@@ -1,0 +1,29 @@
+package com.github.yingzhuo.springboot.side;
+
+import com.github.yingzhuo.springboot.side.util.SpringUtils;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Bean;
+
+import java.io.Serializable;
+
+@ConditionalOnProperty(prefix = "springboot.side.common", name = "enabled", havingValue = "true", matchIfMissing = true)
+@EnableConfigurationProperties(SpringBootSideCommonConfiguration.SpringBootSideCommonConfigurationProperties.class)
+public class SpringBootSideCommonConfiguration {
+
+    @Bean(name = "springUtils")
+    @ConditionalOnMissingBean(SpringUtils.class)
+    public SpringUtils springUtils() {
+        return new SpringUtils();
+    }
+
+    @ConfigurationProperties(prefix = "springboot.side.common")
+    public static class SpringBootSideCommonConfigurationProperties implements Serializable {
+        private boolean enabled = true;
+        public boolean isEnabled() { return enabled; }
+        public void setEnabled(boolean enabled) { this.enabled = enabled;}
+    }
+
+}

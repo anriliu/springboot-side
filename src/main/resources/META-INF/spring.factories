@@ -1,6 +1,6 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.github.yingzhuo.springboot.side.SpringBootSideCommonConfiguration,\
 com.github.yingzhuo.springboot.side.SpringBootSideWebMvcConfiguration,\
-com.github.yingzhuo.springboot.side.util.SpringUtilsConfiguration,\
 com.github.yingzhuo.springboot.side.profile.ProfileValidatorConfiguration,\
 com.github.yingzhuo.springboot.side.logging.LoggerBeanConfiguration,\
 com.github.yingzhuo.springboot.side.web.filter.HttpContextHoldingConfiguration,\

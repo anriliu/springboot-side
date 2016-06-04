@@ -1,0 +1,129 @@
+package com.github.yingzhuo.springboot.side.web.filter;
+
+import com.github.yingzhuo.springboot.side.logging.LoggerBean;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.util.AntPathMatcher;
+import org.springframework.util.PathMatcher;
+import org.springframework.web.filter.OncePerRequestFilter;
+
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.HashSet;
+import java.util.Set;
+
+public class RequestLoggingFilter extends OncePerRequestFilter {
+
+    private LoggerBean loggerBean;
+
+    private final PathMatcher pathMatcher = new AntPathMatcher();
+    private final Set<String> excludes = new HashSet<>();
+
+    @Override
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        String uri = request.getRequestURI();
+
+        if (excludes.parallelStream().noneMatch(pattern -> pathMatcher.match(pattern, uri))) {
+            doLog(request);
+        }
+
+        filterChain.doFilter(request, response);
+    }
+
+    private void doLog(HttpServletRequest request) {
+        String uri = request.getRequestURI();
+        loggerBean.log("===========================================================");
+        loggerBean.log("[URI]: ");
+        loggerBean.log("\t\t\t{}", request.getRequestURI());
+
+        loggerBean.log("[METHOD]: ");
+        loggerBean.log("\t\t\t{}", request.getMethod());
+
+        loggerBean.log("[CLIENT-IP]: ");
+        loggerBean.log("\t\t\t{}", getIpAdress(request));
+
+        loggerBean.log("[HEADERS]: ");
+        Enumeration<String> headerNames = request.getHeaderNames();
+        while (headerNames.hasMoreElements()) {
+            String name = headerNames.nextElement();
+            String value = request.getHeader(name);
+            loggerBean.log("\t\t\t{} = {}", name, name.equalsIgnoreCase("cookie") ? StringUtils.abbreviate(value, 40) : value);
+        }
+
+        loggerBean.log("[PARAMS]: ");
+        Enumeration<String> paramNames = request.getParameterNames();
+        while (paramNames.hasMoreElements()) {
+            String name = paramNames.nextElement();
+            String value = request.getParameter(name);
+            loggerBean.log("\t\t\t{} = {}", name, value);
+        }
+
+        loggerBean.log("===========================================================");
+    }
+
+    private String getIpAdress(HttpServletRequest request) {
+        String ip = request.getHeader("X-Forwarded-For");
+
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+                ip = request.getHeader("Proxy-Client-IP");
+            }
+            if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+                ip = request.getHeader("WL-Proxy-Client-IP");
+            }
+            if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+                ip = request.getHeader("HTTP_CLIENT_IP");
+            }
+            if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+                ip = request.getHeader("HTTP_X_FORWARDED_FOR");
+            }
+            if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+                ip = request.getRemoteAddr();
+            }
+        } else if (ip.length() > 15) {
+            String[] ips = ip.split(",");
+            for (String strIp : ips) {
+                if (!("unknown".equalsIgnoreCase(strIp))) {
+                    ip = strIp;
+                    break;
+                }
+            }
+        }
+        return ip;
+    }
+
+    public RequestLoggingFilter addExcludePattern(String pattern) {
+        if (pattern != null && !pattern.isEmpty()) {
+            excludes.add(pattern);
+        }
+        return this;
+    }
+
+    public RequestLoggingFilter addExcludePatterns(String... patterns) {
+        for (String pattern : patterns) {
+            addExcludePattern(pattern);
+        }
+        return this;
+    }
+
+    public RequestLoggingFilter clearExcludes() {
+        excludes.clear();
+        return this;
+    }
+
+    public Set<String> getExcludes() {
+        return Collections.unmodifiableSet(excludes);
+    }
+
+    public LoggerBean getLoggerBean() {
+        return loggerBean;
+    }
+
+    public void setLoggerBean(LoggerBean loggerBean) {
+        this.loggerBean = loggerBean;
+    }
+}

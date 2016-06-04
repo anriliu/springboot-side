@@ -1,7 +1,8 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.github.yingzhuo.springboot.commons.util.SpringUtilsConfiguration,\
-com.github.yingzhuo.springboot.commons.profile.ProfileValidatorConfiguration,\
-com.github.yingzhuo.springboot.commons.logging.LoggerBeanConfiguration,\
-com.github.yingzhuo.springboot.commons.web.filter.HttpContextHoldingConfiguration,\
-com.github.yingzhuo.springboot.commons.web.filter.RequestLoggingFilterConfiguration,\
-com.github.yingzhuo.springboot.commons.web.servlet.CaptchaServletConfiguration
+com.github.yingzhuo.springboot.side.SpringBootSideWebMvcConfiguration,\
+com.github.yingzhuo.springboot.side.util.SpringUtilsConfiguration,\
+com.github.yingzhuo.springboot.side.profile.ProfileValidatorConfiguration,\
+com.github.yingzhuo.springboot.side.logging.LoggerBeanConfiguration,\
+com.github.yingzhuo.springboot.side.web.filter.HttpContextHoldingConfiguration,\
+com.github.yingzhuo.springboot.side.web.filter.RequestLoggingFilterConfiguration,\
+com.github.yingzhuo.springboot.side.web.servlet.CaptchaServletConfiguration

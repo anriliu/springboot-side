@@ -1,5 +1,6 @@
 package boot.web;
 
+import com.github.yingzhuo.springboot.side.util.IP;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -8,8 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestController {
 
     @RequestMapping("1")
-    public String test1() {
-        return "1";
+    public String test1(@IP String ip) {
+        return ip;
     }
 
 }

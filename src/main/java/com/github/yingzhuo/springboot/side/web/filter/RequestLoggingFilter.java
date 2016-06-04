@@ -1,6 +1,7 @@
 package com.github.yingzhuo.springboot.side.web.filter;
 
 import com.github.yingzhuo.springboot.side.logging.LoggerBean;
+import com.github.yingzhuo.springboot.side.util.IPUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.util.PathMatcher;
@@ -44,7 +45,7 @@ public class RequestLoggingFilter extends OncePerRequestFilter {
         loggerBean.log("\t\t\t{}", request.getMethod());
 
         loggerBean.log("[CLIENT-IP]: ");
-        loggerBean.log("\t\t\t{}", getIpAdress(request));
+        loggerBean.log("\t\t\t{}", IPUtils.getIpAdress(request));
 
         loggerBean.log("[HEADERS]: ");
         Enumeration<String> headerNames = request.getHeaderNames();
@@ -63,37 +64,6 @@ public class RequestLoggingFilter extends OncePerRequestFilter {
         }
 
         loggerBean.log("===========================================================");
-    }
-
-    private String getIpAdress(HttpServletRequest request) {
-        String ip = request.getHeader("X-Forwarded-For");
-
-        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-            if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-                ip = request.getHeader("Proxy-Client-IP");
-            }
-            if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-                ip = request.getHeader("WL-Proxy-Client-IP");
-            }
-            if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-                ip = request.getHeader("HTTP_CLIENT_IP");
-            }
-            if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-                ip = request.getHeader("HTTP_X_FORWARDED_FOR");
-            }
-            if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-                ip = request.getRemoteAddr();
-            }
-        } else if (ip.length() > 15) {
-            String[] ips = ip.split(",");
-            for (String strIp : ips) {
-                if (!("unknown".equalsIgnoreCase(strIp))) {
-                    ip = strIp;
-                    break;
-                }
-            }
-        }
-        return ip;
     }
 
     public RequestLoggingFilter addExcludePattern(String pattern) {

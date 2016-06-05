@@ -5,5 +5,4 @@ com.github.yingzhuo.springboot.side.profile.ProfileValidatorConfiguration,\
 com.github.yingzhuo.springboot.side.logging.LoggerBeanConfiguration,\
 com.github.yingzhuo.springboot.side.web.filter.HttpContextHoldingConfiguration,\
 com.github.yingzhuo.springboot.side.web.filter.RequestLoggingFilterConfiguration,\
-com.github.yingzhuo.springboot.side.web.servlet.CaptchaServletConfiguration,\
-com.github.yingzhuo.springboot.side.restful.security.RestfulSecurityConfiguration
+com.github.yingzhuo.springboot.side.web.servlet.CaptchaServletConfiguration

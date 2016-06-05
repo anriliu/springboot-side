@@ -9,6 +9,7 @@
     <version>1.0.0</version>
     <modules>
         <module>springboot-side-core</module>
+        <module>springboot-side-retry</module>
     </modules>
     <packaging>pom</packaging>
 

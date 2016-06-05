@@ -60,7 +60,6 @@ Profile相关
 这个组件帮助程序员在Spring启动时，检查是否使用了互斥的Profile，如果配置错误Spring启动将会失败。
 
 ```properties
-
 # 开启开关 默认为打开
 springboot.side.profile-validator.enabled=true
 
@@ -85,4 +84,21 @@ public static void runIfPresent(String profile, CodeBlock codeBlock) { ... }
 
 // 如果profile没有被激活，则执行闭包
 public static void runIfAbsent(String profile, CodeBlock codeBlock) { ... }
+```
+
+HTTP请求日志组件
+---
+
+为了程序员方便调试，添加一个`javax.servlet.Filter`用户记录每一个请求的信息。
+
+```properties
+# 开启开关 默认为关闭
+springboot.side.request-logging-filter.enabled=true
+
+# Ant风格指定不起作用的请求
+springboot.side.request-logging-filter.excludes=/**/*.js,/**/*.css,/**/*.ico
+
+# Filter指定过滤的URL
+springboot.side.request-logging-filter.url-patterns[0]=/*
+springboot.side.request-logging-filter.url-patterns[1]=/security/*
 ```

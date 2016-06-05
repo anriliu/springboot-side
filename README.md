@@ -5,6 +5,17 @@
 SpringBoot Side
 ---
 
+安装
+---
+
+```bash
+git clone https://github.com/yingzhuo/springboot-side.git
+mvn -f springboot-side/pom.xml clean install
+```
+
+维基
+---
+
 * [springboot-side-core](https://github.com/yingzhuo/springboot-side/tree/master/springboot-side-core)
 
 

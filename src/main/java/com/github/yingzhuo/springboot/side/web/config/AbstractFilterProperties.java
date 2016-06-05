@@ -1,13 +1,27 @@
 package com.github.yingzhuo.springboot.side.web.config;
 
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.util.Assert;
+
 import java.io.Serializable;
 
-public abstract class AbstractFilterProperties implements Serializable {
+public abstract class AbstractFilterProperties implements Serializable, InitializingBean {
 
     private boolean enabled = true;
     private String filterName;
     private int filterOrder;
     private String[] urlPatterns;
+
+    public AbstractFilterProperties() {
+        super();
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        Assert.notNull(filterName);
+        Assert.notNull(urlPatterns);
+        Assert.noNullElements(urlPatterns);
+    }
 
     public boolean isEnabled() {
         return enabled;

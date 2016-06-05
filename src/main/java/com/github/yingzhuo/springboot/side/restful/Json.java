@@ -40,6 +40,7 @@ public class Json implements Serializable, Iterable<Pair<String, Object>> {
         return list.iterator();
     }
 
+    @Deprecated
     public Json setCode(int code) {
         this.code = code;
         return this;

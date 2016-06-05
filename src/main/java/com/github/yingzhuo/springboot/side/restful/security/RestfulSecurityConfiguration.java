@@ -9,13 +9,16 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.Ordered;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import java.io.Serializable;
+import java.util.List;
 
 @ConditionalOnWebApplication
 @ConditionalOnProperty(prefix = "springboot.side.restful-security", name = "enabled", havingValue = "true", matchIfMissing = true)
 @EnableConfigurationProperties(RestfulSecurityConfiguration.RestfulSecurityConfigurationProperties.class)
-public class RestfulSecurityConfiguration {
+public class RestfulSecurityConfiguration extends WebMvcConfigurerAdapter {
 
     @Bean(name = "basicAuthenticationAccessTokenParser")
     @ConditionalOnMissingBean(AccessTokenParser.class)
@@ -46,6 +49,11 @@ public class RestfulSecurityConfiguration {
         bean.setName(properties.getFilterName());
         bean.setOrder(properties.getFilterOrder());
         return bean;
+    }
+
+    @Override
+    public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
+        argumentResolvers.add(new RestfulSecurityHandlerMethodArgumentResolver());
     }
 
     @ConfigurationProperties(prefix = "springboot.side.restful-security")

@@ -102,3 +102,26 @@ springboot.side.request-logging-filter.excludes=/**/*.js,/**/*.css,/**/*.ico
 springboot.side.request-logging-filter.url-patterns[0]=/*
 springboot.side.request-logging-filter.url-patterns[1]=/security/*
 ```
+
+简易人机验证码生成组件
+---
+
+添加一个`javax.servlet.http.HttpServletRequest`来生成人机验证码，并将人机验证码保存到`Session`。
+
+```java
+# 开启开关 默认为关闭
+springboot.side.captcha-servlet.enabled=true
+
+# 验证码图片宽度
+springboot.side.captcha-servlet.width=100
+
+# 验证码图片高度
+springboot.side.captcha-servlet.height=18
+
+# session attribute name
+springboot.side.captcha-servlet.session-attribute-name=my-session-attribute-name
+
+# url mapping(s)
+springboot.side.captcha-servlet.url-mappings[0]=/captcha
+springboot.side.captcha-servlet.url-mappings[1]=/captcha.jpg
+```

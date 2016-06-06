@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.github.yingzhuo.springboot.side.qiniuyun.QiniuyunConfiguration,\
+com.github.yingzhuo.springboot.side.qiniuyun.QiniuyunHealthEndpointConfiguration

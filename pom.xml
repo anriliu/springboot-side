@@ -21,10 +21,6 @@
         <slf4j.version>1.7.21</slf4j.version>
     </properties>
 
-    <dependencies>
-
-    </dependencies>
-
     <build>
         <finalName>${project.artifactId}-${project.version}</finalName>
         <plugins>

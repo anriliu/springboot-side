@@ -17,7 +17,6 @@
             <version>${springboot.version}</version>
             <optional>true</optional>
         </dependency>
-
         <dependency>
             <groupId>com.github.yingzhuo</groupId>
             <artifactId>springboot-side-core</artifactId>

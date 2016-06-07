@@ -25,7 +25,7 @@ public class ApplicationBoot implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
         InputStream in = FileUtils.openInputStream(new File("/Users/yingzhuo/Desktop/avatar.jpg"));
-        String url = qiniuyunManager.upload(in, "mock-key", true);
+        String url = qiniuyunManager.upload(in, "cat", true);
         System.out.println(url);
         IOUtils.closeQuietly(in);
     }

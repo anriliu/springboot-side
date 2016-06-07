@@ -5,6 +5,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.util.Assert;
 
@@ -12,6 +13,7 @@ import java.io.Serializable;
 
 @ConditionalOnClass(Auth.class)
 @ConditionalOnProperty(prefix = "springboot.side.qiniuyun", name = "enabled", havingValue = "true", matchIfMissing = true)
+@EnableConfigurationProperties(QiniuyunConfiguration.QiniuyunProperties.class)
 public class QiniuyunConfiguration {
 
     @Bean
@@ -19,12 +21,12 @@ public class QiniuyunConfiguration {
         if (properties.getMode() == Mode.MOCK) {
             return new MockQiniuyunManagerImpl(properties.getUrlPrefix());
         } else {
-            SimpleQiniuyunManagerImpl manager = new SimpleQiniuyunManagerImpl();
-            manager.setAk(properties.getAccessKey());
-            manager.setSk(properties.getSecretKey());
-            manager.setBucket(properties.getBucket());
-            manager.setUrlPrefix(properties.getUrlPrefix());
-            return manager;
+            SimpleQiniuyunManagerImpl bean = new SimpleQiniuyunManagerImpl();
+            bean.setAk(properties.getAccessKey());
+            bean.setSk(properties.getSecretKey());
+            bean.setBucket(properties.getBucket());
+            bean.setUrlPrefix(properties.getUrlPrefix());
+            return bean;
         }
     }
 
@@ -43,10 +45,13 @@ public class QiniuyunConfiguration {
 
         @Override
         public void afterPropertiesSet() throws Exception {
-            Assert.hasText(bucket, "you should config 'spring.auto.qiniuyun.bucket'.");
-            Assert.hasText(accessKey, "you should config 'spring.auto.qiniuyun.access-key'.");
-            Assert.hasText(secretKey, "you should config 'spring.auto.qiniuyun.secret-key'.");
-            Assert.hasText(urlPrefix, "you should config 'spring.auto.qiniuyun.url-prefix'.");
+            Assert.hasText(urlPrefix, "you should config 'springboot.side.qiniuyun.url-prefix'.");
+
+            if (mode == Mode.SIMPLE) {
+                Assert.hasText(bucket, "you should config 'springboot.side.qiniuyun.bucket'.");
+                Assert.hasText(accessKey, "you should config 'springboot.side.qiniuyun.access-key'.");
+                Assert.hasText(secretKey, "you should config 'springboot.side.qiniuyun.secret-key'.");
+            }
 
             if (!urlPrefix.endsWith("/")) {
                 urlPrefix += "/";

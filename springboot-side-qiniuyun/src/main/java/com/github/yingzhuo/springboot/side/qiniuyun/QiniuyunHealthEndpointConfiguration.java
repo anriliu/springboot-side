@@ -29,7 +29,6 @@ public class QiniuyunHealthEndpointConfiguration {
             builder.withDetail("access-key", qiniuyunProperties.getAccessKey());
             builder.withDetail("secret-key", "[projected]");
             builder.withDetail("url-prefix", qiniuyunProperties.getUrlPrefix());
-
             return builder.build();
         };
     }

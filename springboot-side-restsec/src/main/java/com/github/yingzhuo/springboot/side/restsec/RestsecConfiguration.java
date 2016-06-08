@@ -36,7 +36,7 @@ import java.util.List;
 @EnableConfigurationProperties(RestsecConfiguration.RestsecProperties.class)
 public class RestsecConfiguration extends WebMvcConfigurerAdapter {
 
-    @Bean
+    @Bean(name = "restsecDefaultAdvisorAutoProxyCreator")
     @ConditionalOnMissingBean(DefaultAdvisorAutoProxyCreator.class)
     public DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator() {
         return new DefaultAdvisorAutoProxyCreator();

@@ -11,6 +11,7 @@ SpringBoot Side
 ```bash
 git clone https://github.com/yingzhuo/springboot-side.git
 mvn -f springboot-side/pom.xml clean install
+rm -rf springboot-side/
 ```
 
 维基

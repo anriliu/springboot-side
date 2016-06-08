@@ -5,7 +5,7 @@ import com.github.yingzhuo.springboot.side.restsec.core.RestsecFilter;
 import com.github.yingzhuo.springboot.side.restsec.core.UserLikeLoader;
 import com.github.yingzhuo.springboot.side.restsec.impl.BasicAuthenticationTokenParser;
 import com.github.yingzhuo.springboot.side.restsec.impl.BearerAuthorizationTokenParser;
-import com.github.yingzhuo.springboot.side.restsec.impl.BrokenUserLikeLoader;
+import com.github.yingzhuo.springboot.side.restsec.impl.NullReturningUserLikeLoader;
 import com.github.yingzhuo.springboot.side.restsec.impl.CompositeAccessTokenParser;
 import com.github.yingzhuo.springboot.side.restsec.web.RestsecHandlerMethodArgumentResolver;
 import com.github.yingzhuo.springboot.side.web.config.AbstractSkippableFilterProperties;
@@ -16,6 +16,7 @@ import org.springframework.boot.context.embedded.FilterRegistrationBean;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.Ordered;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
@@ -38,13 +39,15 @@ public class RestsecConfiguration extends WebMvcConfigurerAdapter {
 
     @Bean
     public UserLikeLoader userLikeLoader() {
-        return new BrokenUserLikeLoader();
+        return new NullReturningUserLikeLoader();
     }
 
     @Bean
-    public FilterRegistrationBean restsecFilter(RestsecProperties properties) {
+    public FilterRegistrationBean restsecFilter(RestsecProperties properties, AccessTokenParser accessTokenParser, UserLikeLoader userLikeLoader) {
         RestsecFilter filter = new RestsecFilter();
-
+        filter.setAccessTokenParser(accessTokenParser);
+        filter.setUserLikeLoader(userLikeLoader);
+        filter.setSkipPatterns(properties.getSkipPatterns());
 
         FilterRegistrationBean bean = new FilterRegistrationBean();
         bean.setFilter(filter);
@@ -62,10 +65,12 @@ public class RestsecConfiguration extends WebMvcConfigurerAdapter {
 
     @ConfigurationProperties(prefix = "springboot.side.restsec")
     public static class RestsecProperties extends AbstractSkippableFilterProperties {
-
         private boolean enabled = true;
 
         public RestsecProperties() {
+            super.setFilterName(RestsecFilter.class.getSimpleName());
+            super.setFilterOrder(Ordered.HIGHEST_PRECEDENCE);
+            super.setUrlPatterns(new String[]{"/*"});
             super.setSkipPatterns(new String[] {
                     "/**/*.js",
                     "/**/*.css",

@@ -8,6 +8,7 @@ public class NullReturningUserLikeLoader implements UserLikeLoader {
 
     @Override
     public UserLike load(AccessToken accessToken) {
-        throw new UnsupportedOperationException();
+        return null;
     }
+
 }

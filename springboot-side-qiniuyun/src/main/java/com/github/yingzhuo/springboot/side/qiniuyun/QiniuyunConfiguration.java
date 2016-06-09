@@ -31,7 +31,7 @@ public class QiniuyunConfiguration {
     }
 
     public enum Mode {
-        SIMPLE, MOCK
+        GENERAL, MOCK
     }
 
     @ConfigurationProperties(prefix = "springboot.side.qiniuyun")
@@ -41,13 +41,13 @@ public class QiniuyunConfiguration {
         private String accessKey;
         private String secretKey;
         private String urlPrefix;
-        private Mode mode = Mode.SIMPLE;
+        private Mode mode = Mode.GENERAL;
 
         @Override
         public void afterPropertiesSet() throws Exception {
             Assert.hasText(urlPrefix, "you should config 'springboot.side.qiniuyun.url-prefix'.");
 
-            if (mode == Mode.SIMPLE) {
+            if (mode == Mode.GENERAL) {
                 Assert.hasText(bucket, "you should config 'springboot.side.qiniuyun.bucket'.");
                 Assert.hasText(accessKey, "you should config 'springboot.side.qiniuyun.access-key'.");
                 Assert.hasText(secretKey, "you should config 'springboot.side.qiniuyun.secret-key'.");

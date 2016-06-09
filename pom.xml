@@ -8,6 +8,7 @@
     <artifactId>springboot-side</artifactId>
     <version>1.0.0</version>
     <modules>
+        <module>springboot-side-chanzor</module>
         <module>springboot-side-core</module>
         <module>springboot-side-qiniuyun</module>
         <module>springboot-side-restsec</module>

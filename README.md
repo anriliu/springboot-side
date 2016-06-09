@@ -18,10 +18,10 @@ curl -X 'GET' -sSLk 'https://raw.githubusercontent.com/yingzhuo/springboot-side/
 ---
 
 * [springboot-side-core](https://github.com/yingzhuo/springboot-side/tree/master/springboot-side-core)
+* [springboot-side-chanzor](https://github.com/yingzhuo/springboot-side/tree/master/springboot-side-chanzor)
 * [springboot-side-qiniuyun](https://github.com/yingzhuo/springboot-side/tree/master/springboot-side-qiniuyun)
 * [springboot-side-restsec](https://github.com/yingzhuo/springboot-side/tree/master/springboot-side-restsec)
 * [springboot-side-retry](https://github.com/yingzhuo/springboot-side/tree/master/springboot-side-retry)
-
 
 许可证
 ---

@@ -20,8 +20,8 @@
 # 开关 默认为关闭
 springboot.side.qiniuyun.enabled=true
 
-# 可选择两种模式 simple: 普通模式，mock: 虚操作模式
-springboot.side.qiniuyun.mode=simple
+# 可选择两种模式 general: 普通模式，mock: 虚操作模式
+springboot.side.qiniuyun.mode=general
 
 # 七牛云bucket
 springboot.side.qiniuyun.bucket=your_bucket

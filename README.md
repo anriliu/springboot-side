@@ -8,14 +8,6 @@ SpringBoot Side
 安装
 ---
 
-MS Windows:
-
-```bash
-git clone https://github.com/yingzhuo/springboot-side.git
-mvn -f springboot-side/pom.xml clean install
-rm -rf springboot-side/
-```
-
 MacOS / Linux:
 
 ```bash

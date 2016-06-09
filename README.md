@@ -19,7 +19,7 @@ rm -rf springboot-side/
 MacOS / Linux:
 
 ```bash
-curl -X 'GET' -sSLk 'https://raw.githubusercontent.com/yingzhuo/springboot-side/master/intall.sh' | sh
+curl -X 'GET' -sSLk 'https://raw.githubusercontent.com/yingzhuo/springboot-side/master/install.sh' | sh
 ```
 
 维基

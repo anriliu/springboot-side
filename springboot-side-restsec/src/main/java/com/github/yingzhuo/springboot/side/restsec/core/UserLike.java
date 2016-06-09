@@ -16,4 +16,6 @@ public interface UserLike {
 
     public boolean isExpired();
 
+    public Object getNativeUser();
+
 }

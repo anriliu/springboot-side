@@ -27,13 +27,18 @@ import org.springframework.core.Ordered;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+import java.io.Serializable;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 @ConditionalOnWebApplication
 @ConditionalOnProperty(prefix = "springboot.side.restsec", name = "enabled", havingValue = "true", matchIfMissing = true)
-@EnableConfigurationProperties(RestsecConfiguration.RestsecProperties.class)
+@EnableConfigurationProperties({
+        RestsecConfiguration.RestsecProperties.class,
+        RestsecConfiguration.MockProperties.class
+})
 public class RestsecConfiguration extends WebMvcConfigurerAdapter {
 
     @Bean(name = "restsecDefaultAdvisorAutoProxyCreator")
@@ -57,11 +62,13 @@ public class RestsecConfiguration extends WebMvcConfigurerAdapter {
     }
 
     @Bean
-    public FilterRegistrationBean restsecFilter(RestsecProperties properties, AccessTokenParser accessTokenParser, UserLikeLoader userLikeLoader) {
+    public FilterRegistrationBean restsecFilter(RestsecProperties properties, MockProperties mockProperties, AccessTokenParser accessTokenParser, UserLikeLoader userLikeLoader) {
         RestsecFilter filter = new RestsecFilter();
         filter.setAccessTokenParser(accessTokenParser);
         filter.setUserLikeLoader(userLikeLoader);
         filter.setSkipPatterns(properties.getSkipPatterns());
+        filter.setMode(properties.getMode());
+        filter.setMockProperties(mockProperties);
 
         FilterRegistrationBean bean = new FilterRegistrationBean();
         bean.setFilter(filter);
@@ -96,9 +103,14 @@ public class RestsecConfiguration extends WebMvcConfigurerAdapter {
         };
     }
 
+    public enum Mode {
+        MOCK, GENERAL
+    }
+
     @ConfigurationProperties(prefix = "springboot.side.restsec")
     public static class RestsecProperties extends AbstractSkippableFilterProperties {
         private boolean enabled = true;
+        private Mode mode = Mode.GENERAL;
 
         public RestsecProperties() {
             super.setFilterName(RestsecFilter.class.getSimpleName());
@@ -125,6 +137,80 @@ public class RestsecConfiguration extends WebMvcConfigurerAdapter {
         public void setEnabled(boolean enabled) {
             this.enabled = enabled;
         }
+
+        public Mode getMode() {
+            return mode;
+        }
+
+        public void setMode(Mode mode) {
+            this.mode = mode;
+        }
     }
 
+    @ConfigurationProperties(prefix = "springboot.side.restsec.mock")
+    public static class MockProperties implements Serializable {
+        private String id = UUID.randomUUID().toString();
+        private String username = "mockuser";
+        private String password = "12345";
+        private String[] roles = new String[] {"ROLE_USER"};
+        private String[] permissions = new String[0];
+        private boolean locked = false;
+        private boolean expired = false;
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
+
+        public String getUsername() {
+            return username;
+        }
+
+        public void setUsername(String username) {
+            this.username = username;
+        }
+
+        public String getPassword() {
+            return password;
+        }
+
+        public void setPassword(String password) {
+            this.password = password;
+        }
+
+        public String[] getRoles() {
+            return roles;
+        }
+
+        public void setRoles(String[] roles) {
+            this.roles = roles;
+        }
+
+        public String[] getPermissions() {
+            return permissions;
+        }
+
+        public void setPermissions(String[] permissions) {
+            this.permissions = permissions;
+        }
+
+        public boolean isLocked() {
+            return locked;
+        }
+
+        public void setLocked(boolean locked) {
+            this.locked = locked;
+        }
+
+        public boolean isExpired() {
+            return expired;
+        }
+
+        public void setExpired(boolean expired) {
+            this.expired = expired;
+        }
+    }
 }

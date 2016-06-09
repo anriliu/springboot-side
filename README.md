@@ -8,10 +8,18 @@ SpringBoot Side
 安装
 ---
 
+MS Windows:
+
 ```bash
 git clone https://github.com/yingzhuo/springboot-side.git
 mvn -f springboot-side/pom.xml clean install
 rm -rf springboot-side/
+```
+
+MacOS / Linux:
+
+```bash
+curl -X 'GET' -sSLk 'https://raw.githubusercontent.com/yingzhuo/springboot-side/master/intall.sh' | sh
 ```
 
 维基

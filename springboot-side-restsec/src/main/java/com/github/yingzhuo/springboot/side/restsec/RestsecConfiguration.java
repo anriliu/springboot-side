@@ -150,8 +150,8 @@ public class RestsecConfiguration extends WebMvcConfigurerAdapter {
     @ConfigurationProperties(prefix = "springboot.side.restsec.mock")
     public static class MockProperties implements Serializable {
         private String id = UUID.randomUUID().toString();
-        private String username = "mockuser";
-        private String password = "12345";
+        private String username = "my_username";
+        private String password = "my_password";
         private String[] roles = new String[] {"ROLE_USER"};
         private String[] permissions = new String[0];
         private boolean locked = false;

@@ -5,6 +5,17 @@
 * [主页](http://www.chanzor.com/)
 * [后台管理程序](http://web.chanzor.com:8080/)
 
+依赖
+---
+
+```xml
+<dependency>
+    <groupId>com.github.yingzhuo</groupId>
+    <artifactId>springboot-side-chanzor</artifactId>
+    <version>1.0.0</version>
+</dependency>
+```
+
 配置
 ---
 

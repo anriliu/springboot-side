@@ -2,6 +2,17 @@
 
 本项目与[apache-shiro](http://shiro.apache.org/)或[spring-security](http://projects.spring.io/spring-security/)类似，对HTTP资源的访问进行控制，如角色/权限的筛选。正如本项目的名称（**REST**ful web service **SEC**urity）所暗示的那样，`restsec`只应当应用于`restful`方式的web应用，如果是展示网页的web应用，建议使用[apache-shiro](http://shiro.apache.org/)或[spring-security](http://projects.spring.io/spring-security/)。
 
+依赖
+---
+
+```xml
+<dependency>
+    <groupId>com.github.yingzhuo</groupId>
+    <artifactId>springboot-side-restsec</artifactId>
+    <version>1.0.0</version>
+</dependency>
+```
+
 核心概念
 ---
 

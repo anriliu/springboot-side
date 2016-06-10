@@ -1,7 +1,10 @@
 package com.github.yingzhuo.springboot.side.restful;
 
-import org.apache.commons.lang3.tuple.Pair;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -11,19 +14,25 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-public class Json implements Serializable, Iterable<Pair<String, Object>> {
+@JsonIgnoreProperties({"empty", "notEmpty"})
+public class Json implements Serializable, Iterable<String> {
+
+    private static final HttpHeaders JSON_HEADERS = new HttpHeaders();
 
     private int code;
     private List<String> errors = new ArrayList<>();
     private Map<String, Object> payloads = new HashMap<>();
+
+    static {
+        JSON_HEADERS.setContentType(MediaType.APPLICATION_JSON_UTF8);
+    }
 
     public static Json create() {
         return new Json().setCode(HttpStatus.OK);
     }
 
     public static Json create(HttpStatus httpStatus, String... errors) {
-        return new Json().setCode(httpStatus)
-                .addErrors(errors);
+        return new Json().setCode(httpStatus).addErrors(errors);
     }
 
     private Json() {
@@ -31,19 +40,8 @@ public class Json implements Serializable, Iterable<Pair<String, Object>> {
     }
 
     @Override
-    public Iterator<Pair<String, Object>> iterator() {
-        List<Pair<String, Object>> list = new ArrayList<>(payloads.size());
-        for (String key : payloads.keySet()) {
-            Object value = payloads.get(key);
-            list.add(Pair.of(key, value));
-        }
-        return list.iterator();
-    }
-
-    @Deprecated
-    public Json setCode(int code) {
-        this.code = code;
-        return this;
+    public Iterator<String> iterator() {
+        return this.payloads.keySet().iterator();
     }
 
     public Json setCode(HttpStatus httpStatus) {
@@ -75,6 +73,19 @@ public class Json implements Serializable, Iterable<Pair<String, Object>> {
         return this;
     }
 
+    public Json clear() {
+        this.payloads.clear();
+        return this;
+    }
+
+    public boolean isEmpty() {
+        return this.payloads.isEmpty();
+    }
+
+    public boolean isNotEmpty() {
+        return !isEmpty();
+    }
+
     public int getCode() {
         return code;
     }
@@ -87,4 +98,7 @@ public class Json implements Serializable, Iterable<Pair<String, Object>> {
         return Collections.unmodifiableMap(payloads);
     }
 
+    public ResponseEntity<Json> asResponseEntity() {
+        return new ResponseEntity<>(this, JSON_HEADERS, HttpStatus.valueOf(getCode()));
+    }
 }

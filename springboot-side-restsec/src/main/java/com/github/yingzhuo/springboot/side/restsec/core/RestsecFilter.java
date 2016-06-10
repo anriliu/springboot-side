@@ -1,6 +1,7 @@
 package com.github.yingzhuo.springboot.side.restsec.core;
 
 import com.github.yingzhuo.springboot.side.restsec.RestsecConfiguration;
+import com.github.yingzhuo.springboot.side.restsec.event.RestsecEventListener;
 import com.github.yingzhuo.springboot.side.web.filter.AbstractSkippableFilter;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.context.request.ServletWebRequest;
@@ -17,6 +18,7 @@ public class RestsecFilter extends AbstractSkippableFilter {
     private UserLikeLoader userLikeLoader;
     private RestsecConfiguration.Mode mode = RestsecConfiguration.Mode.GENERAL;
     private RestsecConfiguration.MockProperties mockProperties;
+    private RestsecEventListener eventListener = RestsecEventListener.DEFAULT;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -116,7 +118,10 @@ public class RestsecFilter extends AbstractSkippableFilter {
 
     private AccessToken parse(NativeWebRequest webRequest) {
         try {
-            return accessTokenParser.parse(webRequest);
+            eventListener.beforeAccessTokenParsing(webRequest);
+            AccessToken accessToken = accessTokenParser.parse(webRequest);
+            eventListener.afterAccessTokenParsing(webRequest, accessToken);
+            return accessToken;
         } catch (Exception e) {
             return null;
         }
@@ -124,7 +129,10 @@ public class RestsecFilter extends AbstractSkippableFilter {
 
     private UserLike load(AccessToken accessToken) {
         try {
-            return userLikeLoader.load(accessToken);
+            eventListener.beforeUserLikeLoading(accessToken);
+            UserLike userLike =  userLikeLoader.load(accessToken);
+            eventListener.afterUserLikeLoading(accessToken, userLike);
+            return userLike;
         } catch (Exception e) {
             return null;
         }
@@ -150,4 +158,7 @@ public class RestsecFilter extends AbstractSkippableFilter {
         this.mockProperties = mockProperties;
     }
 
+    public void setEventListener(RestsecEventListener eventListener) {
+        this.eventListener = eventListener;
+    }
 }

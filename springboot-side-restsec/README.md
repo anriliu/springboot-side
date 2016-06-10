@@ -141,3 +141,21 @@ public class MyController {
     }
 }
 ```
+
+事件监听器
+---
+
+程序员可以配置事件监听器
+
+```java
+@Configuration
+public class SpringConfigRestsec {
+    
+    @Bean
+    public RestsecEventListener restsecEventListener() {
+        return new MyRestsecEventListener();
+    }
+}
+```
+
+**Note:** 在mock模式下事件监听器不会起作用

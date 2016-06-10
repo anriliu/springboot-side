@@ -8,6 +8,7 @@ import com.github.yingzhuo.springboot.side.restsec.annotation.RequiresRoles;
 import com.github.yingzhuo.springboot.side.restsec.core.AccessTokenParser;
 import com.github.yingzhuo.springboot.side.restsec.core.RestsecFilter;
 import com.github.yingzhuo.springboot.side.restsec.core.UserLikeLoader;
+import com.github.yingzhuo.springboot.side.restsec.event.RestsecEventListener;
 import com.github.yingzhuo.springboot.side.restsec.impl.BasicAuthenticationTokenParser;
 import com.github.yingzhuo.springboot.side.restsec.impl.BearerAuthorizationTokenParser;
 import com.github.yingzhuo.springboot.side.restsec.impl.CompositeAccessTokenParser;
@@ -41,6 +42,12 @@ import java.util.UUID;
 })
 public class RestsecConfiguration extends WebMvcConfigurerAdapter {
 
+    @Bean
+    @ConditionalOnMissingBean(RestsecEventListener.class)
+    public RestsecEventListener restsecEventListener() {
+        return RestsecEventListener.DEFAULT;
+    }
+
     @Bean(name = "restsecDefaultAdvisorAutoProxyCreator")
     @ConditionalOnMissingBean(DefaultAdvisorAutoProxyCreator.class)
     public DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator() {
@@ -62,13 +69,20 @@ public class RestsecConfiguration extends WebMvcConfigurerAdapter {
     }
 
     @Bean
-    public FilterRegistrationBean restsecFilter(RestsecProperties properties, MockProperties mockProperties, AccessTokenParser accessTokenParser, UserLikeLoader userLikeLoader) {
+    public FilterRegistrationBean restsecFilter(
+            RestsecProperties properties,
+            MockProperties mockProperties,
+            AccessTokenParser accessTokenParser,
+            UserLikeLoader userLikeLoader,
+            RestsecEventListener eventListener)
+    {
         RestsecFilter filter = new RestsecFilter();
         filter.setAccessTokenParser(accessTokenParser);
         filter.setUserLikeLoader(userLikeLoader);
         filter.setSkipPatterns(properties.getSkipPatterns());
         filter.setMode(properties.getMode());
         filter.setMockProperties(mockProperties);
+        filter.setEventListener(eventListener);
 
         FilterRegistrationBean bean = new FilterRegistrationBean();
         bean.setFilter(filter);

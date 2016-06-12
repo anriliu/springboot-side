@@ -10,6 +10,7 @@
     <modules>
         <module>springboot-side-chanzor</module>
         <module>springboot-side-core</module>
+        <module>springboot-side-patchca</module>
         <module>springboot-side-qiniuyun</module>
         <module>springboot-side-restsec</module>
         <module>springboot-side-retry</module>

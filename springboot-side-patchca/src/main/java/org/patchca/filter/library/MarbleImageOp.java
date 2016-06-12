@@ -86,6 +86,5 @@ public class MarbleImageOp extends AbstractTransformImageOp {
 			}
 		}
 	}
-	
 
 }

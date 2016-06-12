@@ -26,5 +26,4 @@ public class SoftenImageOp extends AbstractConvolveImageOp {
 	public SoftenImageOp() {
 		super(matrix);
 	}
-
 }

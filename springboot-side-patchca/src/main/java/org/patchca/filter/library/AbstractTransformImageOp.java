@@ -34,11 +34,11 @@ public abstract class AbstractTransformImageOp extends AbstractImageOp {
 
     @Override
     protected void filter(int[] inPixels, int[] outPixels, int width, int height) {
+        // long time1 = System.currentTimeMillis();
         if (!initialized) {
             init();
             initialized = true;
         }
-        //long time1 = System.currentTimeMillis();
         double[] t = new double[2];
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {

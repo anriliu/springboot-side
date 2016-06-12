@@ -18,42 +18,25 @@
  */
 package org.patchca.filter.predefined;
 
-import org.patchca.color.ColorFactory;
-import org.patchca.filter.library.CurvesImageOp;
+import org.patchca.filter.library.WobbleImageOp;
 
 import java.awt.image.BufferedImageOp;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CurvesRippleFilterFactory extends RippleFilterFactory {
+public class WobbleAbstractRippleFilterFactory extends AbstractRippleFilterFactory {
 
-    protected CurvesImageOp curves = new CurvesImageOp();
+    protected WobbleImageOp wobble;
 
-    public CurvesRippleFilterFactory() {
-        super();
-    }
-
-    public CurvesRippleFilterFactory(ColorFactory colorFactory) {
-        setColorFactory(colorFactory);
+    public WobbleAbstractRippleFilterFactory() {
+        wobble = new WobbleImageOp();
     }
 
     @Override
     protected List<BufferedImageOp> getPreRippleFilters() {
         List<BufferedImageOp> list = new ArrayList<>();
-        list.add(curves);
+        list.add(wobble);
         return list;
-    }
-
-    public void setStrokeMin(float strokeMin) {
-        curves.setStrokeMin(strokeMin);
-    }
-
-    public void setStrokeMax(float strokeMax) {
-        curves.setStrokeMax(strokeMax);
-    }
-
-    public void setColorFactory(ColorFactory colorFactory) {
-        curves.setColorFactory(colorFactory);
     }
 
 }

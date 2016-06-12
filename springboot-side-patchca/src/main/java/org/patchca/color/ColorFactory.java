@@ -22,6 +22,6 @@ import java.awt.*;
 
 public interface ColorFactory {
 
-    Color getColor(int index);
+    public Color getColor(int index);
 
 }

@@ -11,9 +11,6 @@ import java.io.Serializable;
 public class PatchcaFilterProperties extends AbstractFilterProperties implements Serializable {
 
     private boolean enabled = true;
-    private int r = 25;
-    private int g = 60;
-    private int b = 170;
     private int width = 160;
     private int height = 70;
     private FilterType filterType = FilterType.CURVES;
@@ -33,30 +30,6 @@ public class PatchcaFilterProperties extends AbstractFilterProperties implements
     @Override
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
-    }
-
-    public int getR() {
-        return r;
-    }
-
-    public void setR(int r) {
-        this.r = r;
-    }
-
-    public int getG() {
-        return g;
-    }
-
-    public void setG(int g) {
-        this.g = g;
-    }
-
-    public int getB() {
-        return b;
-    }
-
-    public void setB(int b) {
-        this.b = b;
     }
 
     public int getWidth() {

@@ -23,6 +23,6 @@ import java.awt.image.BufferedImage;
 
 public interface BackgroundFactory {
 
-    void fillBackground(BufferedImage dest);
+    public void fillBackground(BufferedImage dest);
 
 }

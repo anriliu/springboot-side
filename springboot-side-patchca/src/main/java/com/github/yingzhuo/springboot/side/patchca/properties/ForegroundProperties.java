@@ -8,12 +8,12 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import java.awt.*;
 import java.io.Serializable;
 
-@ConfigurationProperties(prefix = "springboot.side.patchca.background")
-public class BackgroundProperties implements Serializable {
+@ConfigurationProperties(prefix = "springboot.side.patchca.foreground")
+public class ForegroundProperties implements Serializable {
 
-    private int r = 255;
-    private int g = 255;
-    private int b = 255;
+    private int r = -1;
+    private int g = -1;
+    private int b = -1;
 
     public int getR() {
         return r;
@@ -46,5 +46,4 @@ public class BackgroundProperties implements Serializable {
             return new SingleColorFactory(new Color(r, g, b));
         }
     }
-
 }

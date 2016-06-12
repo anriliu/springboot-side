@@ -18,24 +18,20 @@
  */
 package org.patchca.filter.predefined;
 
-import org.patchca.filter.library.WobbleImageOp;
+import org.patchca.filter.library.DiffuseImageOp;
 
 import java.awt.image.BufferedImageOp;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WobbleRippleFilterFactory extends RippleFilterFactory {
+public class DiffuseAbstractRippleFilterFactory extends AbstractRippleFilterFactory {
 
-    protected WobbleImageOp wobble;
-
-    public WobbleRippleFilterFactory() {
-        wobble = new WobbleImageOp();
-    }
+    protected DiffuseImageOp diffuse = new DiffuseImageOp();
 
     @Override
     protected List<BufferedImageOp> getPreRippleFilters() {
         List<BufferedImageOp> list = new ArrayList<>();
-        list.add(wobble);
+        list.add(diffuse);
         return list;
     }
 

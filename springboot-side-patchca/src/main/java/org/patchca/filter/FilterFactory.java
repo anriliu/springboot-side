@@ -22,6 +22,6 @@ import java.awt.image.BufferedImage;
 
 public interface FilterFactory {
 
-	BufferedImage applyFilters(BufferedImage source);
+	public BufferedImage applyFilters(BufferedImage source);
 
 }

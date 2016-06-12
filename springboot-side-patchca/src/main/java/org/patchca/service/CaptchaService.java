@@ -20,6 +20,6 @@ package org.patchca.service;
 
 public interface CaptchaService {
 
-    Captcha getCaptcha();
+    public Captcha getCaptcha();
 
 }

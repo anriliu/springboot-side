@@ -1,18 +1,19 @@
 package com.github.yingzhuo.springboot.side.patchca;
 
 import com.github.yingzhuo.springboot.side.patchca.properties.BackgroundProperties;
-import com.github.yingzhuo.springboot.side.patchca.properties.PatchcaFilterProperties;
 import com.github.yingzhuo.springboot.side.patchca.properties.FontProperties;
+import com.github.yingzhuo.springboot.side.patchca.properties.ForegroundProperties;
+import com.github.yingzhuo.springboot.side.patchca.properties.PatchcaFilterProperties;
 import com.github.yingzhuo.springboot.side.patchca.properties.TextRendererProperties;
 import com.github.yingzhuo.springboot.side.patchca.properties.WordProperties;
 import org.patchca.background.SingleColorBackgroundFactory;
-import org.patchca.color.SingleColorFactory;
+import org.patchca.color.ColorFactory;
 import org.patchca.filter.FilterFactory;
-import org.patchca.filter.predefined.CurvesRippleFilterFactory;
-import org.patchca.filter.predefined.DiffuseRippleFilterFactory;
+import org.patchca.filter.predefined.CurvesAbstractRippleFilterFactory;
+import org.patchca.filter.predefined.DiffuseAbstractRippleFilterFactory;
 import org.patchca.filter.predefined.DoubleRippleFilterFactory;
-import org.patchca.filter.predefined.MarbleRippleFilterFactory;
-import org.patchca.filter.predefined.WobbleRippleFilterFactory;
+import org.patchca.filter.predefined.MarbleAbstractRippleFilterFactory;
+import org.patchca.filter.predefined.WobbleAbstractRippleFilterFactory;
 import org.patchca.font.RandomFontFactory;
 import org.patchca.service.ConfigurableCaptchaService;
 import org.patchca.text.renderer.BestFitTextRenderer;
@@ -23,12 +24,12 @@ import org.springframework.boot.context.embedded.FilterRegistrationBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 
-import java.awt.*;
 import java.util.Arrays;
 
 @EnableConfigurationProperties({
         PatchcaFilterProperties.class,
         BackgroundProperties.class,
+        ForegroundProperties.class,
         FontProperties.class,
         WordProperties.class,
         TextRendererProperties.class
@@ -41,6 +42,9 @@ public class PatchcaConfiguration {
 
     @Autowired
     private BackgroundProperties backgroundProperties;
+
+    @Autowired
+    private ForegroundProperties foregroundProperties;
 
     @Autowired
     private WordProperties wordProperties;
@@ -73,14 +77,12 @@ public class PatchcaConfiguration {
         textRenderer.setLeftMargin(textRendererProperties.getLeftMargin());
         textRenderer.setRightMargin(textRendererProperties.getRightMargin());
 
-        // 背景 (目前只能配置单色背景)
+        // 背景
         SingleColorBackgroundFactory backgroundFactory = new SingleColorBackgroundFactory();
-        backgroundFactory.setColorFactory(new SingleColorFactory(
-                new Color(backgroundProperties.getR(), backgroundProperties.getG(), backgroundProperties.getB())));
+        backgroundFactory.setColorFactory(backgroundProperties.createColorFactory());
 
         // 字体
-        SingleColorFactory colorFactory = new SingleColorFactory(
-                new Color(filterProperties.getR(), filterProperties.getG(), filterProperties.getB()));
+        ColorFactory colorFactory = foregroundProperties.createColorFactory();
 
         ConfigurableCaptchaService cs = new ConfigurableCaptchaService();
         cs.setBackgroundFactory(backgroundFactory);
@@ -94,11 +96,11 @@ public class PatchcaConfiguration {
         // 滤镜
         FilterFactory filterFactory;
         switch (filterProperties.getFilterType()) {
-            case CURVES: filterFactory = new CurvesRippleFilterFactory(colorFactory); break;
-            case DIFFUSE: filterFactory = new DiffuseRippleFilterFactory(); break;
+            case CURVES: filterFactory = new CurvesAbstractRippleFilterFactory(colorFactory); break;
+            case DIFFUSE: filterFactory = new DiffuseAbstractRippleFilterFactory(); break;
             case DOUBLE: filterFactory = new DoubleRippleFilterFactory(); break;
-            case MARBLE: filterFactory = new MarbleRippleFilterFactory(); break;
-            case WOBBLE: filterFactory = new WobbleRippleFilterFactory(); break;
+            case MARBLE: filterFactory = new MarbleAbstractRippleFilterFactory(); break;
+            case WOBBLE: filterFactory = new WobbleAbstractRippleFilterFactory(); break;
             default: throw new AssertionError(); // 代码不可能运行到此处
         }
         cs.setFilterFactory(filterFactory);

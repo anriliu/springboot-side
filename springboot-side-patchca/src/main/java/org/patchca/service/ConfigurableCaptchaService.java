@@ -20,7 +20,7 @@ package org.patchca.service;
 
 import org.patchca.background.SingleColorBackgroundFactory;
 import org.patchca.color.SingleColorFactory;
-import org.patchca.filter.predefined.CurvesRippleFilterFactory;
+import org.patchca.filter.predefined.CurvesAbstractRippleFilterFactory;
 import org.patchca.font.RandomFontFactory;
 import org.patchca.text.renderer.BestFitTextRenderer;
 import org.patchca.word.AdaptiveRandomWordFactory;
@@ -33,7 +33,7 @@ public class ConfigurableCaptchaService extends AbstractCaptchaService {
 		fontFactory = new RandomFontFactory();
 		textRenderer = new BestFitTextRenderer();
 		colorFactory = new SingleColorFactory();
-		filterFactory = new CurvesRippleFilterFactory(colorFactory);
+		filterFactory = new CurvesAbstractRippleFilterFactory(colorFactory);
 		textRenderer.setLeftMargin(10);
 		textRenderer.setRightMargin(10);
 		width = 160;

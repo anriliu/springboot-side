@@ -25,9 +25,9 @@ springboot.side.patchca.g=0
 springboot.side.patchca.b=0
 
 # 字体颜色
-springboot.side.patchca.background.r=0
-springboot.side.patchca.background.g=0
-springboot.side.patchca.background.b=0
+springboot.side.patchca.foreground.r=0
+springboot.side.patchca.foreground.g=0
+springboot.side.patchca.foreground.b=0
 
 # 模糊滤镜种类 (共五种)
 springboot.side.patchca.filter-type=double

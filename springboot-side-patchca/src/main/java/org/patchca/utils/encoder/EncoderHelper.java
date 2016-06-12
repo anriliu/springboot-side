@@ -27,6 +27,9 @@ import java.io.OutputStream;
 
 public class EncoderHelper {
 
+    private EncoderHelper() {
+    }
+
 	public static String getChallangeAndWriteImage(CaptchaService service, String format, OutputStream os) throws IOException {
 		Captcha captcha = service.getCaptcha();
 		ImageIO.write(captcha.getImage(), format, os); 

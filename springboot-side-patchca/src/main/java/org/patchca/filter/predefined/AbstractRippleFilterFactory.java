@@ -25,12 +25,12 @@ import java.awt.image.BufferedImageOp;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RippleFilterFactory extends AbstractFilterFactory {
+public abstract class AbstractRippleFilterFactory extends AbstractFilterFactory {
 
     protected List<BufferedImageOp> filters;
     protected RippleImageOp ripple;
 
-    public RippleFilterFactory() {
+    public AbstractRippleFilterFactory() {
         ripple = new RippleImageOp();
     }
 

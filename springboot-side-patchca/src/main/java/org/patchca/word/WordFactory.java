@@ -20,5 +20,6 @@ package org.patchca.word;
 
 public interface WordFactory {
 
-	String getNextWord();
+	public String getNextWord();
+
 }

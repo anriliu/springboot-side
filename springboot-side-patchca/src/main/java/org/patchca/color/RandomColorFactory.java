@@ -28,8 +28,10 @@ public class RandomColorFactory implements ColorFactory {
 	private Color color;
 
 	public RandomColorFactory() {
-		min = new Color(20,40,80);
-		max = new Color(21,50,140);
+//		min = new Color(20 ,40, 80);
+//		min = new Color(20 ,40, 80);
+		min = new Color(0, 0, 0);
+		max = new Color(255 ,255, 255);
 	}
 	
 	public void setMin(Color min) {
@@ -50,5 +52,4 @@ public class RandomColorFactory implements ColorFactory {
 		}
 		return color;
 	}
-
 }

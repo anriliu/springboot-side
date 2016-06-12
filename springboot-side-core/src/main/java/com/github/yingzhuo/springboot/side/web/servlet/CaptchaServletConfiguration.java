@@ -6,6 +6,7 @@ import org.springframework.boot.context.embedded.ServletRegistrationBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 
+@Deprecated
 @ConditionalOnWebApplication
 @ConditionalOnProperty(prefix = "springboot.side.captcha-servlet", name = "enabled", havingValue = "true", matchIfMissing = false)
 @EnableConfigurationProperties(CaptchaServletProperties.class)

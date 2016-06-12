@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.Random;
 
+@Deprecated
 public class CaptchaServlet extends HttpServlet implements Serializable {
 
     private static final String CONTENT_TYPE = "image/jpeg";

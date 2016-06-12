@@ -3,6 +3,7 @@ package com.github.yingzhuo.springboot.side.web.servlet;
 import com.github.yingzhuo.springboot.side.web.config.AbstractServletProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+@Deprecated
 @ConfigurationProperties(prefix = "springboot.side.captcha-servlet")
 public class CaptchaServletProperties extends AbstractServletProperties {
 

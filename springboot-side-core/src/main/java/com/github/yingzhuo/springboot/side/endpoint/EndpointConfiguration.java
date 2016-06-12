@@ -75,9 +75,6 @@ public class EndpointConfiguration {
     @Bean
     @ConditionalOnProperty(prefix = "endpoints.startup", name = "enabled", havingValue = "true", matchIfMissing = true)
     public StartupDateEndpoint startupDateEndpoint(StartupDateProperties properties) {
-        System.out.println(1);
-        System.out.println(1);
-        System.out.println(1);
         StartupDateEndpoint endpoint = new StartupDateEndpoint(properties.getId(), properties.isSensitive(), properties.isEnabled());
         endpoint.setPattern(properties.getPattern());
         return endpoint;

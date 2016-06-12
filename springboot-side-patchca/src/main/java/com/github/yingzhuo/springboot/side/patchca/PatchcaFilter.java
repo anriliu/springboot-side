@@ -1,5 +1,6 @@
 package com.github.yingzhuo.springboot.side.patchca;
 
+import org.patchca.service.CaptchaService;
 import org.patchca.service.ConfigurableCaptchaService;
 import org.patchca.utils.encoder.EncoderHelper;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -15,7 +16,7 @@ import java.io.OutputStream;
 public class PatchcaFilter extends OncePerRequestFilter {
 
     private String patchcaSessionAttributeName = "PATCHCA_SESSION_ATTRIBUTE_NAME";
-    private ConfigurableCaptchaService captchaService = new ConfigurableCaptchaService();
+    private CaptchaService captchaService = new ConfigurableCaptchaService();
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -31,7 +32,7 @@ public class PatchcaFilter extends OncePerRequestFilter {
         outputStream.close();
     }
 
-    public void setCaptchaService(ConfigurableCaptchaService captchaService) {
+    public void setCaptchaService(CaptchaService captchaService) {
         this.captchaService = captchaService;
     }
 

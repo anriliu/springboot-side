@@ -5,15 +5,17 @@ import com.github.yingzhuo.springboot.side.web.config.AbstractFilterProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.core.Ordered;
 
+import java.io.Serializable;
+
 @ConfigurationProperties(prefix = "springboot.side.patchca")
-public class PatchcaFilterProperties extends AbstractFilterProperties {
+public class PatchcaFilterProperties extends AbstractFilterProperties implements Serializable {
 
     private boolean enabled = true;
     private int r = 25;
     private int g = 60;
     private int b = 170;
-    private int width = 150;
-    private int height = 50;
+    private int width = 160;
+    private int height = 70;
     private FilterType filterType = FilterType.CURVES;
     private String sessionAttributeName = "PATCHCA_SESSION_ATTRIBUTE_NAME";
 

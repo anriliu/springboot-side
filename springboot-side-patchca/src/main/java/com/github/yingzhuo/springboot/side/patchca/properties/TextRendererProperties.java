@@ -7,8 +7,8 @@ import java.io.Serializable;
 @ConfigurationProperties(prefix = "springboot.side.patchca.text-renderer")
 public class TextRendererProperties implements Serializable {
 
-    private int leftMargin = 5;
-    private int rightMargin = 5;
+    private int leftMargin = 10;
+    private int rightMargin = 10;
     private int topMargin = 5;
     private int bottomMargin = 5;
 

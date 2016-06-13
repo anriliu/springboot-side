@@ -2,14 +2,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
 
+    <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.yingzhuo</groupId>
     <artifactId>springboot-side</artifactId>
     <version>1.0.0</version>
     <modules>
         <module>springboot-side-chanzor</module>
         <module>springboot-side-core</module>
+        <module>springboot-side-kotlin</module>
         <module>springboot-side-patchca</module>
         <module>springboot-side-qiniuyun</module>
         <module>springboot-side-restsec</module>

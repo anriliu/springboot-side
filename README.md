@@ -19,6 +19,7 @@ curl -X 'GET' -sSLk 'https://raw.githubusercontent.com/yingzhuo/springboot-side/
 
 * [springboot-side-core](https://github.com/yingzhuo/springboot-side/tree/master/springboot-side-core)
 * [springboot-side-chanzor](https://github.com/yingzhuo/springboot-side/tree/master/springboot-side-chanzor)
+* [springboot-side-kotlin](https://github.com/yingzhuo/springboot-side/tree/master/springboot-side-kotlin)
 * [springboot-side-patchca](https://github.com/yingzhuo/springboot-side/tree/master/springboot-side-patchca)
 * [springboot-side-qiniuyun](https://github.com/yingzhuo/springboot-side/tree/master/springboot-side-qiniuyun)
 * [springboot-side-restsec](https://github.com/yingzhuo/springboot-side/tree/master/springboot-side-restsec)

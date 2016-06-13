@@ -13,6 +13,9 @@ SpringBoot kotlin通用工具
 </dependency>
 ```
 
+maven插件
+---
+
 ```xml
 <build>
     <plugins>

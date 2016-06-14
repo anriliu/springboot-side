@@ -49,6 +49,5 @@ public class ProfileValidatorConfiguration {
         public void setMutualExclusionMap(Map<String, Set<String>> mutualExclusionMap) {
             this.mutualExclusionMap = mutualExclusionMap;
         }
-
     }
 }

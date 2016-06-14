@@ -21,7 +21,7 @@ public class RequestLoggingFilter extends OncePerRequestFilter {
 
     private LoggerBean loggerBean;
 
-    private static final String BARS = StringUtils.repeat('=', 60);
+    private static final String BARS = StringUtils.repeat('=', 120);
 
     private final PathMatcher pathMatcher = new AntPathMatcher();
     private final Set<String> excludes = new HashSet<>();

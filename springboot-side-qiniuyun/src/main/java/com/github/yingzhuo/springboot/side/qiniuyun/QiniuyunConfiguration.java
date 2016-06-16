@@ -45,15 +45,16 @@ public class QiniuyunConfiguration {
 
         @Override
         public void afterPropertiesSet() throws Exception {
-            Assert.hasText(urlPrefix, "you should config 'springboot.side.qiniuyun.url-prefix'.");
+            Assert.notNull(mode, "you should config 'springboot.side.qiniuyun.mode'.");
 
             if (mode == Mode.GENERAL) {
+                Assert.hasText(urlPrefix, "you should config 'springboot.side.qiniuyun.url-prefix'.");
                 Assert.hasText(bucket, "you should config 'springboot.side.qiniuyun.bucket'.");
                 Assert.hasText(accessKey, "you should config 'springboot.side.qiniuyun.access-key'.");
                 Assert.hasText(secretKey, "you should config 'springboot.side.qiniuyun.secret-key'.");
             }
 
-            if (!urlPrefix.endsWith("/")) {
+            if (urlPrefix != null && !urlPrefix.endsWith("/")) {
                 urlPrefix += "/";
             }
         }

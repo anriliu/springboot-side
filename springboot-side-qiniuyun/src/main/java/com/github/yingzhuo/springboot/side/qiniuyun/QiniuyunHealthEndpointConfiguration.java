@@ -15,7 +15,7 @@ import java.util.UUID;
 public class QiniuyunHealthEndpointConfiguration {
 
     @Bean(name = "qiniuyun")
-    public HealthIndicator qiniuyunHealthIndicator(QiniuyunManager qiniuyunManager, QiniuyunConfiguration.QiniuyunProperties qiniuyunProperties) {
+    public HealthIndicator qiniuyunHealthIndicator(QiniuyunManager qiniuyunManager, QiniuyunConfiguration.QiniuyunProperties properties) {
         return () -> {
             Health.Builder builder = new Health.Builder();
 
@@ -25,10 +25,11 @@ public class QiniuyunHealthEndpointConfiguration {
                 builder.down();
             }
 
-            builder.withDetail("bucket", qiniuyunProperties.getBucket());
-            builder.withDetail("access-key", qiniuyunProperties.getAccessKey());
+            builder.withDetail("bucket", properties.getBucket() != null ? properties.getBucket() : "(unknown)");
+            builder.withDetail("access-key", properties.getAccessKey() != null ? properties.getAccessKey() : "(unknown)");
             builder.withDetail("secret-key", "[projected]");
-            builder.withDetail("url-prefix", qiniuyunProperties.getUrlPrefix());
+            builder.withDetail("url-prefix", properties.getUrlPrefix() != null ? properties.getUrlPrefix() : "(unknown)");
+
             return builder.build();
         };
     }

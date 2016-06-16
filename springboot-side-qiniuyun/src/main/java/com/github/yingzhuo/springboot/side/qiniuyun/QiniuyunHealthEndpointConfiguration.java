@@ -35,11 +35,18 @@ public class QiniuyunHealthEndpointConfiguration {
 
     private boolean isReachable(QiniuyunManager qiniuyunManager) {
         try {
-            qiniuyunManager.exists(UUID.randomUUID().toString());
+            qiniuyunManager.exists(randomQiniuKey());
             return true;
         } catch (Exception e) {
             return false;
         }
     }
+
+    private String randomQiniuKey() {
+        StringBuilder builder = new StringBuilder();
+        builder.append(UUID.randomUUID().toString());
+        builder.append(UUID.randomUUID().toString());
+        builder.append(UUID.randomUUID().toString());
+        return builder.toString();
+    }
 }
-// retrofit

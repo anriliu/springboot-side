@@ -19,11 +19,7 @@ public final class SpringUtils implements ApplicationContextAware {
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        if (APPCTX != null) {
-            throw new IllegalStateException();
-        } else {
-            APPCTX = applicationContext;
-        }
+        APPCTX = applicationContext;
     }
 
     public static ApplicationContext getApplicationContext() {

@@ -14,15 +14,14 @@ public class ApplicationBoot implements ApplicationRunner {
     private QiniuyunManager qiniuyunManager;
 
     public static void main(String[] args) {
-        SpringApplication.run(ApplicationBoot.class, args);
+        SpringApplication.run(ApplicationBoot.class, args).close();
     }
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-//        InputStream in = FileUtils.openInputStream(new File("/Users/yingzhuo/Desktop/avatar.jpg"));
-//        String url = qiniuyunManager.upload(in, "cat", true);
-//        System.out.println(url);
-//        IOUtils.closeQuietly(in);
+        String in = "https://aecpm.alicdn.com/simba/img/TB1gu_NKpXXXXarXVXXSutbFXXX.jpg";
+        String url = qiniuyunManager.upload(in, "cat", true);
+        System.out.println(url);
     }
 
 }

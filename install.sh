@@ -17,6 +17,7 @@ if [ -f springboot-side-install.log ]; then
     rm springboot-side-install.log
 fi
 
+# 克隆项目
 git clone https://github.com/yingzhuo/springboot-side.git | tee -a springboot-side-install.log
 
 # 安装

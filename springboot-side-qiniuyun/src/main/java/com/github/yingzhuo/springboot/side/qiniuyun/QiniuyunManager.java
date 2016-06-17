@@ -28,6 +28,16 @@ public interface QiniuyunManager {
     public String upload(InputStream data, String key, boolean overwrite);
 
     /**
+     * 上传文件 (公开方式)
+     *
+     * @param urlData 数据
+     * @param key 数据key
+     * @param overwrite 是否为覆盖上传 true时表示覆盖方式上传
+     * @return 上传成功后资源URL
+     */
+    public String upload(String urlData, String key, boolean overwrite);
+
+    /**
      * 资源重命名
      *
      * @param fromKey 原资源Key
@@ -61,4 +71,5 @@ public interface QiniuyunManager {
      * @throws QiniuyunIOException 操作失败时抛出
      */
     public void deleteByUrl(String url);
+
 }

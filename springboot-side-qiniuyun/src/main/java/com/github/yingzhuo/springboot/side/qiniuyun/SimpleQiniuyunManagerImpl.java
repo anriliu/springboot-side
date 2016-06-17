@@ -15,6 +15,7 @@ import org.springframework.util.Assert;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 
 public class SimpleQiniuyunManagerImpl implements QiniuyunManager, InitializingBean {
 
@@ -55,6 +56,16 @@ public class SimpleQiniuyunManagerImpl implements QiniuyunManager, InitializingB
     public String upload(InputStream data, String key, boolean overwrite) {
         try {
             byte[] d = IOUtils.toByteArray(data);
+            return upload(d, key, overwrite);
+        } catch (IOException e) {
+            throw new QiniuyunIOException(e.getMessage(), e);
+        }
+    }
+
+    @Override
+    public String upload(String urlData, String key, boolean overwrite) {
+        try {
+            byte[] d = IOUtils.toByteArray(new URL(urlData));
             return upload(d, key, overwrite);
         } catch (IOException e) {
             throw new QiniuyunIOException(e.getMessage(), e);

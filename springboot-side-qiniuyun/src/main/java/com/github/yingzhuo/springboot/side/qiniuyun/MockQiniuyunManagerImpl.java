@@ -21,6 +21,11 @@ public class MockQiniuyunManagerImpl implements QiniuyunManager {
     }
 
     @Override
+    public String upload(String urlData, String key, boolean overwrite) {
+        return urlPrefix + key;
+    }
+
+    @Override
     public String rename(String fromKey, String toKey) {
         return urlPrefix + toKey;
     }

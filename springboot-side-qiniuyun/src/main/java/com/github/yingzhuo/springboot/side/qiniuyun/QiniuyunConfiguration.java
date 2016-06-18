@@ -54,6 +54,10 @@ public class QiniuyunConfiguration {
                 Assert.hasText(secretKey, "you should config 'springboot.side.qiniuyun.secret-key'.");
             }
 
+            if (mode == Mode.MOCK) {
+                urlPrefix = "http://mock.qiniuyun.com/";
+            }
+
             if (urlPrefix != null && !urlPrefix.endsWith("/")) {
                 urlPrefix += "/";
             }

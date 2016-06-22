@@ -10,6 +10,10 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>springboot-side-retry</artifactId>
 
+    <properties>
+        <checkstyle>${basedir}/../huawei_checks.xml</checkstyle>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>

@@ -114,6 +114,11 @@ public class RestsecFilter extends AbstractSkippableFilter {
         public Object getNativeUser() {
             return null;
         }
+
+        @Override
+        public <T> T getNativeUser(Class<T> clas) {
+            return null;
+        }
     }
 
     private AccessToken parse(NativeWebRequest webRequest) {

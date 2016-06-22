@@ -119,7 +119,7 @@ public class MyController {
         return "1";
     }
 
-	 // 访问方法者必须是未经认证的
+	// 访问方法者必须是未经认证的
     @RequiresGuest
     @RequestMapping(value = "/2", method = RequestMethod.GET)
     public String m2() {
@@ -137,7 +137,7 @@ public class MyController {
     @RequiresPermissions(logical = Logical.OR, value = {"PER_ACCESS_DB", "PER_ACCESS_REDIS"})
     @RequestMapping(value = "/4", method = RequestMethod.PUT)
     public String m4() {
-        return "3";
+        return "4";
     }
 }
 ```

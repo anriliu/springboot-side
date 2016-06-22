@@ -18,4 +18,6 @@ public interface UserLike {
 
     public Object getNativeUser();
 
+    public <T> T getNativeUser(Class<T> clas);
+
 }

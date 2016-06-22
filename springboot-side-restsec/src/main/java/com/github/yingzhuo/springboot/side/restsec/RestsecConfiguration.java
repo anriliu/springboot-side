@@ -10,8 +10,6 @@ import com.github.yingzhuo.springboot.side.restsec.core.RestsecFilter;
 import com.github.yingzhuo.springboot.side.restsec.core.UserLikeLoader;
 import com.github.yingzhuo.springboot.side.restsec.event.RestsecEventListener;
 import com.github.yingzhuo.springboot.side.restsec.impl.BasicAuthenticationTokenParser;
-import com.github.yingzhuo.springboot.side.restsec.impl.BearerAuthorizationTokenParser;
-import com.github.yingzhuo.springboot.side.restsec.impl.CompositeAccessTokenParser;
 import com.github.yingzhuo.springboot.side.restsec.impl.NullReturningUserLikeLoader;
 import com.github.yingzhuo.springboot.side.restsec.web.RestsecHandlerMethodArgumentResolver;
 import com.github.yingzhuo.springboot.side.web.config.AbstractSkippableFilterProperties;
@@ -57,10 +55,7 @@ public class RestsecConfiguration extends WebMvcConfigurerAdapter {
     @Bean
     @ConditionalOnMissingBean(AccessTokenParser.class)
     public AccessTokenParser accessTokenParser() {
-        return new CompositeAccessTokenParser(Arrays.asList(
-                new BasicAuthenticationTokenParser(),
-                new BearerAuthorizationTokenParser()
-        ));
+        return new BasicAuthenticationTokenParser();
     }
 
     @Bean

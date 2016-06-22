@@ -1,5 +1,6 @@
 package com.github.yingzhuo.springboot.side.kotlin
 
+import com.github.yingzhuo.springboot.side.util.EmojiUtils
 import org.apache.commons.codec.digest.DigestUtils
 import org.apache.commons.lang3.time.DateUtils
 import java.nio.charset.Charset
@@ -36,3 +37,6 @@ fun String.toDate(vararg patterns: String): Date =
 
 fun String.toCalendar(vararg patterns: String): Calendar =
         DateUtils.toCalendar(this.toDate(*patterns))
+
+fun String.removeEmojis(encoding: String = "UTF-8"): String =
+        EmojiUtils.removeEmojis(this, encoding)

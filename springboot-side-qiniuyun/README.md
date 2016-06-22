@@ -36,7 +36,7 @@ springboot.side.qiniuyun.secret-key=your_secret_key
 springboot.side.qiniuyun.url-prefix=htt://host:port/
 ```
 
-**Note:** bucket, access-key, secret-key等意义请参考七牛官方文档。
+> **注意:** bucket, access-key, secret-key等意义请参考七牛官方文档。
 
 注入
 ---

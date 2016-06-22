@@ -74,7 +74,7 @@ public class SpringConfigRestsec {
 }
 ```
 
-**Note:** 如果不自己实现`AccessTokenParser`，`restsec`将采用`Basic Authentication`验证。
+> **注意:** 如果不自己实现`AccessTokenParser`，`restsec`将采用`Basic Authentication`验证。
 
 mock模式
 ---
@@ -158,4 +158,4 @@ public class SpringConfigRestsec {
 }
 ```
 
-**Note:** 在mock模式下事件监听器不会起作用
+> **注意:**  在mock模式下事件监听器不会起作用

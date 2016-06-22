@@ -103,7 +103,7 @@ springboot.side.request-logging-filter.url-patterns[0]=/*
 springboot.side.request-logging-filter.url-patterns[1]=/security/*
 ```
 
-简易人机验证码生成组件
+~~简易人机验证码生成组件~~
 ---
 
 添加一个`javax.servlet.http.HttpServletRequest`来生成人机验证码，并将人机验证码保存到`Session`。

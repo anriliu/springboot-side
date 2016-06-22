@@ -57,7 +57,7 @@ springboot.side.patchca.text-renderer.left-margin=5
 springboot.side.patchca.text-renderer.right-margin=5
 ```
 
-**Note:** 绝大多数配置都有默认值，开箱即用。
+> **注意:** 绝大多数配置都有默认值，开箱即用。
 
 参考资料
 ---

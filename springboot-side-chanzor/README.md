@@ -26,7 +26,7 @@ springboot.side.chanzor.account=account
 springboot.side.chanzor.password=12345
 ```
 
-**Note:** mode为mock时，只用于调试。不真正的发送短信。
+> **注意:** mode为mock时，只用于调试。不真正的发送短信。
 
 注入
 ---

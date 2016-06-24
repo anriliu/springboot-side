@@ -22,18 +22,22 @@ public class ProfileUtils {
         return Collections.unmodifiableSet(new HashSet<>(getActiveProfiles()));
     }
 
-    public static boolean isProfileActive(String profile) {
+    public static boolean isProfileActived(String profile) {
         return !StringUtils.isBlank(profile) && getActiveProfilesAsSet().contains(profile);
     }
 
+    public static boolean isProfileNotActived(String profile) {
+        return !isProfileActived(profile);
+    }
+
     public static void runIfPresent(String profile, CodeBlock codeBlock) {
-        if (getActiveProfilesAsSet().contains(profile)) {
+        if (isProfileActived(profile)) {
             codeBlock.run();
         }
     }
 
     public static void runIfAbsent(String profile, CodeBlock codeBlock) {
-        if (!getActiveProfilesAsSet().contains(profile)) {
+        if (isProfileNotActived(profile)) {
             codeBlock.run();
         }
     }

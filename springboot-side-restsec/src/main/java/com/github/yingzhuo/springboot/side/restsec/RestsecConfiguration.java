@@ -59,6 +59,7 @@ public class RestsecConfiguration extends WebMvcConfigurerAdapter {
     }
 
     @Bean
+    @ConditionalOnMissingBean(UserLikeLoader.class)
     public UserLikeLoader userLikeLoader() {
         return new NullReturningUserLikeLoader();
     }

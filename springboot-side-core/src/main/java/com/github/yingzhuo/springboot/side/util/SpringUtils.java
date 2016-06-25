@@ -34,6 +34,8 @@ public class SpringUtils implements ApplicationContextAware, ApplicationRunner {
         ARGS = args;
     }
 
+    /* ----------------------------------------------------------------------------------------- */
+
     public static ApplicationContext getApplicationContext() {
         return APPCTX;
     }
@@ -58,16 +60,26 @@ public class SpringUtils implements ApplicationContextAware, ApplicationRunner {
         return APPCTX.getEnvironment();
     }
 
+    public static <T> T getBean(Class<T> beanType) {
+        return APPCTX.getBean(beanType);
+    }
+
+    public static <T> T getBean(Class<T> beanType, String beanName) {
+        return APPCTX.getBean(beanName, beanType);
+    }
+
+    /* ----------------------------------------------------------------------------------------- */
+
     public static List<String> getActivedProfiles() {
         return Collections.unmodifiableList(Arrays.asList(getEnvironment().getActiveProfiles()));
     }
 
-    public static Set<String> getActiveProfilesAsSet() {
+    public static Set<String> getActivedProfilesAsSet() {
         return Collections.unmodifiableSet(new HashSet<>(getActivedProfiles()));
     }
 
     public static boolean isProfileActived(String profile) {
-        return !StringUtils.isBlank(profile) && getActiveProfilesAsSet().contains(profile);
+        return !StringUtils.isBlank(profile) && getActivedProfilesAsSet().contains(profile);
     }
 
     public static boolean isProfileNotActived(String profile) {
@@ -86,7 +98,9 @@ public class SpringUtils implements ApplicationContextAware, ApplicationRunner {
         }
     }
 
-    public static String[] getSourceArgs() {
+    /* ----------------------------------------------------------------------------------------- */
+
+    public static String[] getRawSourceArgs() {
         return ARGS.getSourceArgs();
     }
 

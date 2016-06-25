@@ -1,13 +1,13 @@
 package com.github.yingzhuo.springboot.side.kotlin.profile
 
-import com.github.yingzhuo.springboot.side.profile.ProfileUtils
+import com.github.yingzhuo.springboot.side.util.SpringUtils
 
-inline fun inProfile(profile: String, lambda: () -> Unit): Unit {
-    if (profile in ProfileUtils.getActiveProfilesAsSet()) lambda()
+inline fun ifProfileActived(profile: String, lambda: () -> Unit): Unit {
+    if (SpringUtils.isProfileActived(profile)) {
+        lambda()
+    }
 }
 
-fun activeProfiles(): List<String> =
-        ProfileUtils.getActiveProfiles()
+fun activedProfiles(): List<String> = SpringUtils.getActivedProfiles()
 
-fun isInProfile(profile: String): Boolean =
-        profile in activeProfiles()
+fun isProfileActived(profile: String): Boolean = SpringUtils.isProfileActived(profile)

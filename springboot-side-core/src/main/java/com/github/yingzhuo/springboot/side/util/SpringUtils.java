@@ -1,6 +1,6 @@
 package com.github.yingzhuo.springboot.side.util;
 
-import com.github.yingzhuo.springboot.side.func.CodeBlock;
+import com.github.yingzhuo.springboot.side.func.Runnable;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.boot.ApplicationArguments;
@@ -86,13 +86,13 @@ public class SpringUtils implements ApplicationContextAware, ApplicationRunner {
         return !isProfileActived(profile);
     }
 
-    public static void runIfProfileActived(String profile, CodeBlock codeBlock) {
+    public static void runIfProfileActived(String profile, Runnable codeBlock) {
         if (isProfileActived(profile)) {
             codeBlock.run();
         }
     }
 
-    public static void runIfProfileNotActived(String profile, CodeBlock codeBlock) {
+    public static void runIfProfileNotActived(String profile, Runnable codeBlock) {
         if (isProfileNotActived(profile)) {
             codeBlock.run();
         }

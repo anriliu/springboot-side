@@ -3,7 +3,7 @@ package com.github.yingzhuo.springboot.side.util;
 import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
 
-public class EmojiUtils {
+public final class EmojiUtils {
 
     private EmojiUtils() {
     }

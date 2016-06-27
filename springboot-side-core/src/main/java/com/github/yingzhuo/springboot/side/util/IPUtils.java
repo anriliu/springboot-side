@@ -2,7 +2,11 @@ package com.github.yingzhuo.springboot.side.util;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class IPUtils {
+public final class IPUtils {
+
+    private IPUtils() {
+        super();
+    }
 
     public static String getIpAdress(HttpServletRequest request) {
         String ip = request.getHeader("X-Forwarded-For");

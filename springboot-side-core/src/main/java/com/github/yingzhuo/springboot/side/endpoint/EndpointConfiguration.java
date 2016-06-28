@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.env.Environment;
 
 import java.io.Serializable;
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.List;
 @ConditionalOnClass(EndpointProperties.class)
 @EnableConfigurationProperties({
         EndpointConfiguration.EndpointsProperties.class,
-        EndpointConfiguration.StartupDateProperties.class
+        EndpointConfiguration.StartupProperties.class
 })
 public class EndpointConfiguration {
 
@@ -74,14 +75,14 @@ public class EndpointConfiguration {
 
     @Bean
     @ConditionalOnProperty(prefix = "endpoints.startup", name = "enabled", havingValue = "true", matchIfMissing = true)
-    public StartupDateEndpoint startupDateEndpoint(StartupDateProperties properties) {
-        StartupDateEndpoint endpoint = new StartupDateEndpoint(properties.getId(), properties.isSensitive(), properties.isEnabled());
+    public StartupEndpoint startupDateEndpoint(StartupProperties properties, Environment environment) {
+        StartupEndpoint endpoint = new StartupEndpoint(properties.getId(), properties.isSensitive(), properties.isEnabled(), environment);
         endpoint.setPattern(properties.getPattern());
         return endpoint;
     }
 
     @ConfigurationProperties(prefix = "endpoints.startup")
-    public static class StartupDateProperties implements Serializable {
+    public static class StartupProperties implements Serializable {
         private String id = "startup";
         private boolean enabled = true;
         private boolean sensitive = false;

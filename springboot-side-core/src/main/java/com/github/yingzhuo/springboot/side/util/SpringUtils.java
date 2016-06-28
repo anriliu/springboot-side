@@ -89,23 +89,34 @@ public class SpringUtils implements ApplicationContextAware, ApplicationRunner, 
         return Collections.unmodifiableSet(new HashSet<>(getActivedProfiles()));
     }
 
-    public static boolean isProfileActived(String profile) {
-        return !StringUtils.isBlank(profile) && getActivedProfilesAsSet().contains(profile);
+    /**
+     * Return whether one or more of the given profiles is active or not, in the case of no
+     * explicit active profiles, whether one or more of the given profiles is included in
+     * the set of default profiles. If a profile begins with '!' the logic is inverted,
+     * i.e. the method will return true if the given profile is <em>not</em> active.
+     * For example, <pre class="code">SpringUtils.acceptsProfiles("p1", "!p2")</pre>
+     * will return {@code true} if profile 'p1' is active and 'p2' is not active.
+     *
+     * @throws IllegalArgumentException if called with zero arguments or if any profile is {@code null}, empty or whitespace-only
+     */
+    public static boolean acceptsProfiles(String... profiles) {
+        for (String profile : profiles) {
+            if (!getEnvironment().acceptsProfiles(profile)) {
+                return false;
+            }
+        }
+        return true;
     }
 
-    public static boolean isProfileNotActived(String profile) {
-        return !isProfileActived(profile);
-    }
-
-    public static void runIfProfileActived(String profile, Runnable codeBlock) {
-        if (isProfileActived(profile)) {
-            codeBlock.run();
+    public static void runIfProfileActived(String profile, Runnable runnable) {
+        if (acceptsProfiles(profile)) {
+            runnable.run();
         }
     }
 
-    public static void runIfProfileNotActived(String profile, Runnable codeBlock) {
-        if (isProfileNotActived(profile)) {
-            codeBlock.run();
+    public static void runIfProfileNotActived(String profile, Runnable runnable) {
+        if (!acceptsProfiles(profile)) {
+            runnable.run();
         }
     }
 

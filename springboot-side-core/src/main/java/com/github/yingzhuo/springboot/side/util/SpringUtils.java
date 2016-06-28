@@ -3,11 +3,15 @@ package com.github.yingzhuo.springboot.side.util;
 import com.github.yingzhuo.springboot.side.func.Runnable;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.BeanDefinitionStoreException;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.MessageSource;
 import org.springframework.core.Ordered;
 import org.springframework.core.env.Environment;
@@ -24,11 +28,17 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class SpringUtils implements ApplicationContextAware, ApplicationRunner, Ordered {
+public final class SpringUtils implements ApplicationContextAware, ApplicationRunner, Ordered {
+
+    static final SpringUtils INSTANCE = new SpringUtils();
 
     private static ApplicationContext APPCTX = null;
     private static ApplicationArguments ARGS = null;
     private static final PathMatcher DEFAULT_PATH_MATCHER = new AntPathMatcher();
+
+    private SpringUtils() {
+        super();
+    }
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
@@ -89,16 +99,6 @@ public class SpringUtils implements ApplicationContextAware, ApplicationRunner, 
         return Collections.unmodifiableSet(new HashSet<>(getActivedProfiles()));
     }
 
-    /**
-     * Return whether one or more of the given profiles is active or not, in the case of no
-     * explicit active profiles, whether one or more of the given profiles is included in
-     * the set of default profiles. If a profile begins with '!' the logic is inverted,
-     * i.e. the method will return true if the given profile is <em>not</em> active.
-     * For example, <pre class="code">SpringUtils.acceptsProfiles("p1", "!p2")</pre>
-     * will return {@code true} if profile 'p1' is active and 'p2' is not active.
-     *
-     * @throws IllegalArgumentException if called with zero arguments or if any profile is {@code null}, empty or whitespace-only
-     */
     public static boolean acceptsProfiles(String... profiles) {
         for (String profile : profiles) {
             if (!getEnvironment().acceptsProfiles(profile)) {
@@ -168,4 +168,23 @@ public class SpringUtils implements ApplicationContextAware, ApplicationRunner, 
             throw new IllegalArgumentException(ioe.getCause());
         }
     }
+
+    /* ----------------------------------------------------------------------------------------- */
+
+    public static void registerBean(String beanName, BeanDefinition beanDefinition) {
+        if (APPCTX == null) {
+            throw new NullPointerException("Application NOT initialized yet.");
+        }
+
+        try {
+            ConfigurableApplicationContext configurableApplicationContext = (ConfigurableApplicationContext) APPCTX;
+            DefaultListableBeanFactory beanFactory = (DefaultListableBeanFactory) configurableApplicationContext.getBeanFactory();
+            beanFactory.registerBeanDefinition(beanName, beanDefinition);
+        } catch (IllegalStateException | BeanDefinitionStoreException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new IllegalStateException(e);
+        }
+    }
+
 }

@@ -1,6 +1,5 @@
 package com.github.yingzhuo.springboot.side;
 
-import com.github.yingzhuo.springboot.side.util.SpringUtils;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -18,12 +17,6 @@ public class SpringBootSideCommonConfiguration {
     @ConditionalOnMissingBean(DefaultAdvisorAutoProxyCreator.class)
     public DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator() {
         return new DefaultAdvisorAutoProxyCreator();
-    }
-
-    @Bean(name = "springUtils")
-    @ConditionalOnMissingBean(SpringUtils.class)
-    public SpringUtils springUtils() {
-        return new SpringUtils();
     }
 
     @ConfigurationProperties(prefix = "springboot.side.common")

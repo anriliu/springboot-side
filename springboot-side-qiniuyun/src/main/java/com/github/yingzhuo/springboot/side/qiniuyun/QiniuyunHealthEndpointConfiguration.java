@@ -25,10 +25,12 @@ public class QiniuyunHealthEndpointConfiguration {
                 builder.down();
             }
 
-            builder.withDetail("bucket", properties.getBucket() != null ? properties.getBucket() : "(unknown)");
-            builder.withDetail("access-key", properties.getAccessKey() != null ? properties.getAccessKey() : "(unknown)");
+
+            builder.withDetail("mode", properties.getMode());
+            builder.withDetail("bucket", properties.getBucket() != null ? properties.getBucket() : "[unknown]");
+            builder.withDetail("access-key", properties.getAccessKey() != null ? properties.getAccessKey() : "[unknown]");
             builder.withDetail("secret-key", "[projected]");
-            builder.withDetail("url-prefix", properties.getUrlPrefix() != null ? properties.getUrlPrefix() : "(unknown)");
+            builder.withDetail("url-prefix", properties.getUrlPrefix() != null ? properties.getUrlPrefix() : "[unknown]");
 
             return builder.build();
         };

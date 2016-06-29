@@ -11,7 +11,7 @@
     <artifactId>springboot-side-kotlin</artifactId>
 
     <properties>
-        <kotlin.version>1.0.2</kotlin.version>
+        <kotlin.version>1.0.2-1</kotlin.version>
         <checkstyle>${basedir}/../huawei_checks.xml</checkstyle>
     </properties>
 

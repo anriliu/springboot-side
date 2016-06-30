@@ -6,4 +6,5 @@ com.github.yingzhuo.springboot.side.logging.LoggerBeanConfiguration,\
 com.github.yingzhuo.springboot.side.web.filter.RequestLoggingFilterConfiguration,\
 com.github.yingzhuo.springboot.side.web.servlet.CaptchaServletConfiguration,\
 com.github.yingzhuo.springboot.side.endpoint.EndpointConfiguration,\
+com.github.yingzhuo.springboot.side.keygen.KeyGeneratorConfiguration,\
 com.github.yingzhuo.springboot.side.util.UtilsConfiguration

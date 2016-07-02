@@ -33,6 +33,8 @@ fun String.removeWhitespace(): String = remove { it.isWhitespace() }
 
 fun String.removeSpace(): String = remove { it.equals(" ") }
 
+fun String.containsWhitespace(): Boolean = this.any { it.isWhitespace() }
+
 fun String.leftPad(size: Int, padString: String = " "): String = StringUtils.leftPad(this, size, padString)
 
 fun String.rightPad(size: Int, padString: String = " "): String = StringUtils.rightPad(this, size, padString)

@@ -61,3 +61,19 @@ fun String.toCalendar(vararg patterns: String): Calendar =
 
 fun String.removeEmojis(encoding: String = "UTF-8"): String =
         EmojiUtils.removeEmojis(this, encoding)
+
+fun String.isAlpha(): Boolean = all { it.isLetter() }
+
+fun String.isAlphaSpace(): Boolean = all { it.isLetter() || it.equals(' ') }
+
+fun String.isAlphanumeric(): Boolean = all { it.isLetterOrDigit() }
+
+fun String.isAlphanumericSpace(): Boolean = all { it.isLetterOrDigit() || it.equals(' ') }
+
+fun String.isAsciiPrintable(): Boolean = all { it.toInt() >= 32 && it.toInt() < 127 }
+
+fun String.isNumeric(): Boolean = all { it.isDigit() }
+
+fun String.isNumericSpace(): Boolean = all { it.isDigit() || it.equals(' ') }
+
+fun String.isWhitespace(): Boolean = all { it.isWhitespace() }

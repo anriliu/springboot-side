@@ -15,4 +15,3 @@ infix fun String.and(model: Pair<String, Any>): ModelAndView =
 val ModelAndView.isNotEmpty: Boolean get() = !isEmpty
 
 val ModelAndView.size: Int get() = this.modelMap.size
-

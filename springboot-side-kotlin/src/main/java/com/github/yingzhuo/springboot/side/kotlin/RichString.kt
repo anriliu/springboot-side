@@ -62,18 +62,72 @@ fun String.toCalendar(vararg patterns: String): Calendar =
 fun String.removeEmojis(encoding: String = "UTF-8"): String =
         EmojiUtils.removeEmojis(this, encoding)
 
-fun String.isAlpha(): Boolean = all { it.isLetter() }
+fun String.isAlpha(): Boolean {
+    if ("" == this) {
+        return false
+    }
+    return all { it.isLetter() }
+}
 
-fun String.isAlphaSpace(): Boolean = all { it.isLetter() || it.equals(' ') }
+fun String.isAlphaSpace(): Boolean {
+    if ("" == this) {
+        return false
+    }
+    return all { it.isLetter() || it == ' ' }
+}
 
-fun String.isAlphanumeric(): Boolean = all { it.isLetterOrDigit() }
+fun String.isAlphanumeric(): Boolean {
+    if ("" == this) {
+        return false
+    }
+    return all { it.isLetterOrDigit() }
+}
 
-fun String.isAlphanumericSpace(): Boolean = all { it.isLetterOrDigit() || it.equals(' ') }
+fun String.isAlphanumericSpace(): Boolean {
+    if ("" == this) {
+        return false
+    }
+    return all { it.isLetterOrDigit() || it == ' ' }
+}
 
-fun String.isAsciiPrintable(): Boolean = all { it.toInt() >= 32 && it.toInt() < 127 }
+fun String.isAsciiPrintable(): Boolean {
+    if ("" == this) {
+        return false
+    }
+    return all { it.toInt() >= 32 && it.toInt() < 127 }
+}
 
-fun String.isNumeric(): Boolean = all { it.isDigit() }
+fun String.isNumeric(): Boolean {
+    if ("" == this) {
+        return false
+    }
+    return all { it.isDigit() }
+}
 
-fun String.isNumericSpace(): Boolean = all { it.isDigit() || it.equals(' ') }
+fun String.isNumericSpace(): Boolean {
+    if ("" == this) {
+        return false
+    }
+    return all { it.isDigit() || it.equals(' ') }
+}
 
-fun String.isWhitespace(): Boolean = all { it.isWhitespace() }
+fun String.isWhitespace(): Boolean {
+    if ("" == this) {
+        return false
+    }
+    return all { it.isWhitespace() }
+}
+
+fun String.isAllLowerCase(): Boolean {
+    if ("" == this) {
+        return false
+    }
+    return all { it.toChar() >= 'a' && it.toChar() <= 'z' }
+}
+
+fun String.isAllUpperCase(): Boolean  {
+    if ("" == this) {
+        return false
+    }
+    return all { it.toChar() >= 'A' && it.toChar() <= 'Z' }
+}

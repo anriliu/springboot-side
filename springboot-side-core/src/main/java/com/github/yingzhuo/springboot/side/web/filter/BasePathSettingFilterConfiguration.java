@@ -12,10 +12,11 @@ import org.springframework.context.annotation.Bean;
 public class BasePathSettingFilterConfiguration {
 
     @Bean
-    public FilterRegistrationBean requestLoggingFilter(BasePathSettingFilterProperties properties) {
+    public FilterRegistrationBean basePathSettingFilter(BasePathSettingFilterProperties properties) {
         BasePathSettingFilter filter = new BasePathSettingFilter();
         filter.setBasepathAttributeNames(properties.getBasepathAttributeNames());
         filter.setScope(properties.getScope());
+        filter.setEndWithSlash(properties.isEndWithSlash());
         FilterRegistrationBean bean = new FilterRegistrationBean();
         bean.setFilter(filter);
         bean.setEnabled(properties.isEnabled());

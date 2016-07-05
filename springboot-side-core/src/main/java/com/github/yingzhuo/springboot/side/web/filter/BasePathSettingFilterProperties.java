@@ -9,9 +9,9 @@ public class BasePathSettingFilterProperties extends AbstractFilterProperties {
 
     private String[] basepathAttributeNames = new String[] { "webroot", "WEBROOT", "basePath", "BASEPATH" };
     private BasePathSettingFilter.AttributeScope scope = BasePathSettingFilter.AttributeScope.REQUEST;
+    private boolean endWithSlash = true;
 
     public BasePathSettingFilterProperties() {
-        super();
         super.setEnabled(true);
         super.setFilterName(BasePathSettingFilter.class.getSimpleName());
         super.setFilterOrder(Ordered.LOWEST_PRECEDENCE);
@@ -32,6 +32,14 @@ public class BasePathSettingFilterProperties extends AbstractFilterProperties {
 
     public void setScope(BasePathSettingFilter.AttributeScope scope) {
         this.scope = scope;
+    }
+
+    public boolean isEndWithSlash() {
+        return endWithSlash;
+    }
+
+    public void setEndWithSlash(boolean endWithSlash) {
+        this.endWithSlash = endWithSlash;
     }
 
 }

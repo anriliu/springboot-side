@@ -12,6 +12,7 @@ public final class BasePathSettingFilter extends OncePerRequestFilter {
 
     private String[] basepathAttributeNames = new String[]{"webroot", "WEBROOT", "basePath", "BASEPATH"};
     private AttributeScope scope = AttributeScope.REQUEST;
+    private boolean endWithSlash = true;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -36,7 +37,8 @@ public final class BasePathSettingFilter extends OncePerRequestFilter {
             final String serverName = request.getServerName();
             final int port = request.getServerPort();
             final String path = request.getContextPath();
-            return scheme + "://" + serverName + ":" + port + path;
+            final String basePath = scheme + "://" + serverName + ":" + port + path;
+            return endWithSlash ? basePath + "/" : basePath;
         } catch (Exception e) {
             return null;
         }
@@ -48,6 +50,10 @@ public final class BasePathSettingFilter extends OncePerRequestFilter {
 
     public void setScope(AttributeScope scope) {
         this.scope = scope;
+    }
+
+    public void setEndWithSlash(boolean endWithSlash) {
+        this.endWithSlash = endWithSlash;
     }
 
     public enum AttributeScope {

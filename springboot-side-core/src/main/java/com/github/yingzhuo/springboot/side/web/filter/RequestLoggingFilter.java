@@ -17,7 +17,7 @@ import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Set;
 
-public class RequestLoggingFilter extends OncePerRequestFilter {
+public final class RequestLoggingFilter extends OncePerRequestFilter {
 
     private LoggerBean loggerBean;
 

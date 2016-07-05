@@ -1,8 +1,10 @@
 package com.github.yingzhuo.springboot.side.web.filter;
 
 import com.github.yingzhuo.springboot.side.web.config.AbstractFilterProperties;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.core.Ordered;
 
+@ConfigurationProperties(prefix = "springboot.side.basepath-setting-filter")
 public class BasePathSettingFilterProperties extends AbstractFilterProperties {
 
     private String[] basepathAttributeNames = new String[] { "webroot", "WEBROOT", "basePath", "BASEPATH" };

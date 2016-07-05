@@ -11,6 +11,7 @@ import java.io.IOException;
 public final class BasePathSettingFilter extends OncePerRequestFilter {
 
     private String[] basepathAttributeNames = new String[]{"webroot", "WEBROOT", "basePath", "BASEPATH"};
+    private AttributeScope scope = AttributeScope.REQUEST;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -18,7 +19,12 @@ public final class BasePathSettingFilter extends OncePerRequestFilter {
         final String basePath = getBasePath(request);
 
         for (String attrName : basepathAttributeNames) {
-            request.setAttribute(attrName, basePath);
+
+            if (this.scope == AttributeScope.REQUEST) {
+                request.setAttribute(attrName, basePath);
+            } else {
+                request.getSession(true).setAttribute(attrName, basePath);
+            }
         }
 
         filterChain.doFilter(request, response);
@@ -38,6 +44,14 @@ public final class BasePathSettingFilter extends OncePerRequestFilter {
 
     public void setBasepathAttributeNames(String[] basepathAttributeNames) {
         this.basepathAttributeNames = basepathAttributeNames;
+    }
+
+    public void setScope(AttributeScope scope) {
+        this.scope = scope;
+    }
+
+    public enum AttributeScope {
+        REQUEST, SESSION
     }
 
 }

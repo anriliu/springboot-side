@@ -1,17 +1,15 @@
 package com.github.yingzhuo.springboot.side.web.filter;
 
 import com.github.yingzhuo.springboot.side.web.config.AbstractFilterProperties;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.core.Ordered;
 
-@ConditionalOnWebApplication
-@ConditionalOnProperty(prefix = "springboot.side.basepath-setting-filter", name = "enabled", havingValue = "true", matchIfMissing = true)
 public class BasePathSettingFilterProperties extends AbstractFilterProperties {
 
     private String[] basepathAttributeNames = new String[] { "webroot", "WEBROOT", "basePath", "BASEPATH" };
+    private BasePathSettingFilter.AttributeScope scope = BasePathSettingFilter.AttributeScope.REQUEST;
 
     public BasePathSettingFilterProperties() {
+        super();
         super.setEnabled(true);
         super.setFilterName(BasePathSettingFilter.class.getSimpleName());
         super.setFilterOrder(Ordered.LOWEST_PRECEDENCE);
@@ -24,6 +22,14 @@ public class BasePathSettingFilterProperties extends AbstractFilterProperties {
 
     public void setBasepathAttributeNames(String[] basepathAttributeNames) {
         this.basepathAttributeNames = basepathAttributeNames;
+    }
+
+    public BasePathSettingFilter.AttributeScope getScope() {
+        return scope;
+    }
+
+    public void setScope(BasePathSettingFilter.AttributeScope scope) {
+        this.scope = scope;
     }
 
 }

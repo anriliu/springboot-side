@@ -15,6 +15,7 @@ public class BasePathSettingFilterConfiguration {
     public FilterRegistrationBean requestLoggingFilter(BasePathSettingFilterProperties properties) {
         BasePathSettingFilter filter = new BasePathSettingFilter();
         filter.setBasepathAttributeNames(properties.getBasepathAttributeNames());
+        filter.setScope(properties.getScope());
         FilterRegistrationBean bean = new FilterRegistrationBean();
         bean.setFilter(filter);
         bean.setEnabled(properties.isEnabled());

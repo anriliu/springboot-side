@@ -1,5 +1,6 @@
 package com.github.yingzhuo.springboot.side.kotlin
 
+import com.github.yingzhuo.springboot.side.encoder.BCryptEncoder
 import com.github.yingzhuo.springboot.side.util.EmojiUtils
 import org.apache.commons.codec.digest.DigestUtils
 import org.apache.commons.lang3.StringUtils
@@ -46,6 +47,9 @@ fun String.md5(): String =
 
 fun String.sha1(): String =
         DigestUtils.sha1Hex(this)
+
+fun String.bcrypt(): String =
+        BCryptEncoder.INSTANCE.encode(this)
 
 fun String.base64Encode(charset: Charset = Charsets.UTF_8): String =
         Base64.getUrlEncoder().encodeToString(this.toByteArray(charset))

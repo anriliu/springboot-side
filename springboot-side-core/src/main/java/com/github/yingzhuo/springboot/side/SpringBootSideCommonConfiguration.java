@@ -1,11 +1,14 @@
 package com.github.yingzhuo.springboot.side;
 
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.support.MessageSourceAccessor;
 
 import java.io.Serializable;
 
@@ -17,6 +20,12 @@ public class SpringBootSideCommonConfiguration {
     @ConditionalOnMissingBean(DefaultAdvisorAutoProxyCreator.class)
     public DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator() {
         return new DefaultAdvisorAutoProxyCreator();
+    }
+
+    @ConditionalOnMissingBean(MessageSourceAccessor.class)
+    @ConditionalOnBean(MessageSource.class)
+    public MessageSourceAccessor defaultMessageSourceAccessor(MessageSource messageSource) {
+        return new MessageSourceAccessor(messageSource);
     }
 
     @ConfigurationProperties(prefix = "springboot.side.common")

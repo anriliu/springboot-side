@@ -7,7 +7,7 @@ public class UtilsConfiguration {
 
     @ConditionalOnMissingBean(SpringUtils.class)
     @Bean(name = "___spring_utils___")
-    public SpringUtils springUtils() {
+    public SpringUtils springBeanUtils() {
         return SpringUtils.INSTANCE;
     }
 

@@ -1,5 +1,6 @@
 package com.github.yingzhuo.springboot.side;
 
+import com.github.yingzhuo.springboot.side.util.SpringUtils;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -8,6 +9,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Primary;
 import org.springframework.context.support.MessageSourceAccessor;
 
 import java.io.Serializable;
@@ -15,6 +17,13 @@ import java.io.Serializable;
 @ConditionalOnProperty(prefix = "springboot.side.common", name = "enabled", havingValue = "true", matchIfMissing = true)
 @EnableConfigurationProperties(SpringBootSideCommonConfiguration.SpringBootSideCommonConfigurationProperties.class)
 public class SpringBootSideCommonConfiguration {
+
+    @Bean
+    @Primary
+    @ConditionalOnMissingBean(SpringUtils.class)
+    public SpringUtils springUtils() {
+        return SpringUtils.INSTANCE;
+    }
 
     @Bean(name = "commonDefaultAdvisorAutoProxyCreator")
     @ConditionalOnMissingBean(DefaultAdvisorAutoProxyCreator.class)

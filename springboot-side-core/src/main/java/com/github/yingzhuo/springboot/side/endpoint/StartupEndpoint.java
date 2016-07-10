@@ -1,5 +1,6 @@
 package com.github.yingzhuo.springboot.side.endpoint;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -11,6 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@JsonIgnoreProperties("pattern")
 public class StartupEndpoint extends AbstractEndpoint<Map<String, Object>> implements ApplicationRunner {
 
     private Date startup;

@@ -13,7 +13,6 @@ import org.springframework.context.EnvironmentAware;
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceResolvable;
 import org.springframework.context.NoSuchMessageException;
-import org.springframework.context.support.ApplicationObjectSupport;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.core.Ordered;
 import org.springframework.core.env.Environment;
@@ -22,7 +21,14 @@ import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.util.PathMatcher;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.context.support.WebApplicationObjectSupport;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;
@@ -31,7 +37,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
-public final class SpringUtils extends ApplicationObjectSupport
+public final class SpringUtils extends WebApplicationObjectSupport
         implements EnvironmentAware, ApplicationRunner, Ordered {
 
     public static final SpringUtils INSTANCE = new SpringUtils();
@@ -231,4 +237,43 @@ public final class SpringUtils extends ApplicationObjectSupport
             throw new IllegalStateException(e);
         }
     }
+
+    /* ----------------------------------------------------------------------------------------- */
+
+    public static ServletContext getServletCtx() {
+        try {
+            return THIS.getServletContext();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public static HttpServletRequest getRequest() {
+        try {
+            ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+            return attributes.getRequest();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public static HttpServletResponse getResponse() {
+        try {
+            ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+            return attributes.getResponse();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public static HttpSession getSession() {
+        return getSession(true);
+    }
+
+    public static HttpSession getSession(boolean create) {
+        HttpServletRequest request = getRequest();
+        return request != null ? request.getSession(create) : null;
+    }
+
+
 }

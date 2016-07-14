@@ -1,5 +1,6 @@
 package com.github.yingzhuo.springboot.side.web.filter;
 
+import com.github.yingzhuo.springboot.side.web.AttributeScope;
 import com.github.yingzhuo.springboot.side.web.config.AbstractFilterProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.core.Ordered;
@@ -8,7 +9,7 @@ import org.springframework.core.Ordered;
 public class BasePathSettingFilterProperties extends AbstractFilterProperties {
 
     private String[] basepathAttributeNames = new String[] { "webroot", "WEBROOT", "basePath", "BASEPATH" };
-    private BasePathSettingFilter.AttributeScope scope = BasePathSettingFilter.AttributeScope.REQUEST;
+    private AttributeScope scope = AttributeScope.REQUEST;
     private boolean endWithSlash = true;
 
     public BasePathSettingFilterProperties() {
@@ -26,11 +27,11 @@ public class BasePathSettingFilterProperties extends AbstractFilterProperties {
         this.basepathAttributeNames = basepathAttributeNames;
     }
 
-    public BasePathSettingFilter.AttributeScope getScope() {
+    public AttributeScope getScope() {
         return scope;
     }
 
-    public void setScope(BasePathSettingFilter.AttributeScope scope) {
+    public void setScope(AttributeScope scope) {
         this.scope = scope;
     }
 

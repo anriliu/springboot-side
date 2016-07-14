@@ -1,5 +1,6 @@
 package com.github.yingzhuo.springboot.side.web.filter;
 
+import com.github.yingzhuo.springboot.side.web.AttributeScope;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -54,10 +55,6 @@ public final class BasePathSettingFilter extends OncePerRequestFilter {
 
     public void setEndWithSlash(boolean endWithSlash) {
         this.endWithSlash = endWithSlash;
-    }
-
-    public enum AttributeScope {
-        REQUEST, SESSION
     }
 
 }

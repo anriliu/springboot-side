@@ -23,6 +23,7 @@ public class BasePathSettingFilterConfiguration {
         bean.addUrlPatterns(properties.getUrlPatterns());
         bean.setName(properties.getFilterName());
         bean.setOrder(properties.getFilterOrder());
+        bean.setName(BasePathSettingFilter.class.getSimpleName());
         return bean;
     }
 }

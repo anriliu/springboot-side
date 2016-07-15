@@ -12,6 +12,9 @@ infix fun String.and(modelMap: ModelMap?): ModelAndView =
 infix fun String.and(model: Pair<String, Any>): ModelAndView =
         ModelAndView(this, model.first, model.second)
 
+infix fun String.and(unit: Unit): ModelAndView =
+        ModelAndView(this)
+
 val ModelAndView.isNotEmpty: Boolean get() = !isEmpty
 
 val ModelAndView.size: Int get() = this.modelMap.size

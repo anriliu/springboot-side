@@ -21,7 +21,7 @@ fi
 git clone https://github.com/yingzhuo/springboot-side.git | tee -a springboot-side-install.log
 
 # 安装
-mvn -f ./springboot-side/pom.xml clean install -Dmaven.test.skip=true | tee -a springboot-side-install.log
+mvn -f ./springboot-side/pom.xml clean install -U -Dmaven.test.skip=true | tee -a springboot-side-install.log
 
 # 删除项目
 rm -rf springboot-side/

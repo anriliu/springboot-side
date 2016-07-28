@@ -15,6 +15,7 @@
         <module>springboot-side-qiniuyun</module>
         <module>springboot-side-restsec</module>
         <module>springboot-side-retry</module>
+        <module>springboot-side-ssh2</module>
     </modules>
     <packaging>pom</packaging>
 

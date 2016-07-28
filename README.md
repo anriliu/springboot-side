@@ -22,6 +22,7 @@ curl -X 'GET' -sSL 'https://raw.githubusercontent.com/yingzhuo/springboot-side/m
 * [springboot-side-qiniuyun](https://github.com/yingzhuo/springboot-side/tree/master/springboot-side-qiniuyun)
 * [springboot-side-restsec](https://github.com/yingzhuo/springboot-side/tree/master/springboot-side-restsec)
 * [springboot-side-retry](https://github.com/yingzhuo/springboot-side/tree/master/springboot-side-retry)
+* [springboot-side-ssh2](https://github.com/yingzhuo/springboot-side/tree/master/springboot-side-ssh2)
 
 许可证
 ---

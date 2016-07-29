@@ -3,13 +3,13 @@ package com.github.yingzhuo.springboot.side.ssh2.core;
 public class MockShellExecutor implements ShellExecutor {
 
     @Override
-    public Integer execute(String shellPath) {
-        return 0;
+    public void execute(String shellPath) {
+        // NOP
     }
 
     @Override
-    public Integer execute(String shellPath, String... args) {
-        return 0;
+    public void execute(String shellPath, String... args) {
+        // NOP
     }
 
 }

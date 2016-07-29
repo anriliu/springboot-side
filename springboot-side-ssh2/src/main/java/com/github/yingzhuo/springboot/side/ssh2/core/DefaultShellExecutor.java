@@ -18,12 +18,12 @@ public class DefaultShellExecutor implements ShellExecutor {
     private String password;
 
     @Override
-    public Integer execute(String shellPath) {
-        return execute(shellPath, DEFAULT_ARGS);
+    public void execute(String shellPath) {
+        execute(shellPath, DEFAULT_ARGS);
     }
 
     @Override
-    public Integer execute(String shellPath, String... args) {
+    public void execute(String shellPath, String... args) {
         Validate.notBlank(shellPath);
 
         final StringBuilder cmds = new StringBuilder(shellPath);
@@ -38,7 +38,6 @@ public class DefaultShellExecutor implements ShellExecutor {
             connection = login();
             session = connection.openSession();
             session.execCommand(cmds.toString());
-            return session.getState();
         } catch (IOException ex) {
             throw new ShellException(ex);
         } finally {

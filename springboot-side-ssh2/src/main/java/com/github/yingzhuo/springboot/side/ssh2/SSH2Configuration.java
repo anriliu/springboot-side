@@ -4,12 +4,14 @@ import ch.ethz.ssh2.Connection;
 import com.github.yingzhuo.springboot.side.ssh2.core.DefaultShellExecutor;
 import com.github.yingzhuo.springboot.side.ssh2.core.MockShellExecutor;
 import com.github.yingzhuo.springboot.side.ssh2.core.ShellExecutor;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.util.Assert;
 
 import java.io.Serializable;
 
@@ -39,7 +41,7 @@ public class SSH2Configuration {
     }
 
     @ConfigurationProperties(prefix = "springboot.side.ssh2")
-    public static class SSH2Properties implements Serializable {
+    public static class SSH2Properties implements Serializable, InitializingBean {
 
         private boolean enabled = true;
         private Mode mode = Mode.GENERAL;
@@ -47,6 +49,15 @@ public class SSH2Configuration {
         private Integer port = 22;
         private String username = "root";
         private String password = "";
+
+        @Override
+        public void afterPropertiesSet() throws Exception {
+            if (isEnabled() && getMode() == Mode.GENERAL) {
+                Assert.hasText(hostname, "'springboot.side.ssh2.hostname' not configed.");
+                Assert.hasText(username, "'springboot.side.ssh2.username' not configed.");
+                Assert.notNull(port, "'springboot.side.ssh2.port' not configed.");
+            }
+        }
 
         public String getHostname() {
             return hostname;

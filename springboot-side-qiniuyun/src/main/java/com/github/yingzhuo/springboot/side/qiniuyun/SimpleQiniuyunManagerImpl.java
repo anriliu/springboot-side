@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.Assert;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -57,6 +58,15 @@ public class SimpleQiniuyunManagerImpl implements QiniuyunManager, InitializingB
         try {
             byte[] d = IOUtils.toByteArray(data);
             return upload(d, key, overwrite);
+        } catch (IOException e) {
+            throw new QiniuyunIOException(e.getMessage(), e);
+        }
+    }
+
+    @Override
+    public String upload(MultipartFile data, String key, boolean overwrite) {
+        try {
+            return upload(data.getInputStream(), key, overwrite);
         } catch (IOException e) {
             throw new QiniuyunIOException(e.getMessage(), e);
         }

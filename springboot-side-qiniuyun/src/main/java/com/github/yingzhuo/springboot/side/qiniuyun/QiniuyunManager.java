@@ -1,6 +1,7 @@
 package com.github.yingzhuo.springboot.side.qiniuyun;
 
 import com.github.yingzhuo.springboot.side.qiniuyun.exception.QiniuyunIOException;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.InputStream;
 
@@ -26,6 +27,17 @@ public interface QiniuyunManager {
      * @throws QiniuyunIOException 操作失败抛出
      */
     public String upload(InputStream data, String key, boolean overwrite);
+
+    /**
+     * 上传文件 (公开方式)
+     *
+     * @param data 数据
+     * @param key 数据key
+     * @param overwrite 是否为覆盖上传 true时表示覆盖方式上传
+     * @return 上传成功后资源URL
+     * @throws QiniuyunIOException 操作失败抛出
+     */
+    public String upload(MultipartFile data, String key, boolean overwrite);
 
     /**
      * 上传文件 (公开方式)

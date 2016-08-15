@@ -1,5 +1,7 @@
 package com.github.yingzhuo.springboot.side.qiniuyun;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import java.io.InputStream;
 
 public class MockQiniuyunManagerImpl implements QiniuyunManager {
@@ -17,6 +19,11 @@ public class MockQiniuyunManagerImpl implements QiniuyunManager {
 
     @Override
     public String upload(InputStream data, String key, boolean overwrite) {
+        return urlPrefix + key;
+    }
+
+    @Override
+    public String upload(MultipartFile data, String key, boolean overwrite) {
         return urlPrefix + key;
     }
 

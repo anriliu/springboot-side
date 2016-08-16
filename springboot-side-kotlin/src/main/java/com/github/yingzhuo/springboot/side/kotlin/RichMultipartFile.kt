@@ -7,3 +7,11 @@ inline fun MultipartFile?.ifPresent(lambda: (MultipartFile) -> Unit) {
         lambda(this)
     }
 }
+
+inline fun MultipartFile?.ifAbsent(lambda: (MultipartFile) -> Unit) {
+    if (this == null) return
+
+    if (this.isEmpty || this.size == 0L) {
+        lambda(this)
+    }
+}

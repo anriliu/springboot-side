@@ -15,7 +15,8 @@ import java.util.List;
 @ConditionalOnClass(EndpointProperties.class)
 @EnableConfigurationProperties({
         EndpointConfiguration.EndpointsProperties.class,
-        EndpointConfiguration.StartupProperties.class
+        EndpointConfiguration.StartupProperties.class,
+        EndpointConfiguration.FingerprintProperties.class
 })
 public class EndpointConfiguration {
 
@@ -29,6 +30,8 @@ public class EndpointConfiguration {
         bean.setSort(properties.isSort());
         return bean;
     }
+
+    // ------------------------------------------------------------------------------------------------
 
     @ConfigurationProperties(prefix = "endpoints.endpoints")
     public static class EndpointsProperties implements Serializable {
@@ -70,8 +73,6 @@ public class EndpointConfiguration {
             this.sort = sort;
         }
     }
-
-    // ------------------------------------------------------------------------------------------------
 
     @Bean
     @ConditionalOnProperty(prefix = "endpoints.startup", name = "enabled", havingValue = "true", matchIfMissing = true)
@@ -118,6 +119,45 @@ public class EndpointConfiguration {
 
         public void setPattern(String pattern) {
             this.pattern = pattern;
+        }
+    }
+
+    // ------------------------------------------------------------------------------------------------
+
+    @Bean
+    @ConditionalOnProperty(prefix = "endpoints.fingerprint", name = "enabled", havingValue = "true", matchIfMissing = true)
+    public FingerprintEndpoint fingerprintEndpoint(FingerprintProperties properties) {
+        return new FingerprintEndpoint(properties.getId(), properties.isSensitive(), properties.isEnabled());
+    }
+
+    @ConfigurationProperties(prefix = "endpoints.fingerprint")
+    public static class FingerprintProperties implements Serializable {
+        private String id = "fingerprint";
+        private boolean enabled = true;
+        private boolean sensitive = false;
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
+
+        public boolean isEnabled() {
+            return enabled;
+        }
+
+        public void setEnabled(boolean enabled) {
+            this.enabled = enabled;
+        }
+
+        public boolean isSensitive() {
+            return sensitive;
+        }
+
+        public void setSensitive(boolean sensitive) {
+            this.sensitive = sensitive;
         }
     }
 }

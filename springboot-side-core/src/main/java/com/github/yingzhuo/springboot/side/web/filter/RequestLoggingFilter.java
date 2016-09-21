@@ -38,7 +38,6 @@ public final class RequestLoggingFilter extends OncePerRequestFilter {
     }
 
     private void doLog(HttpServletRequest request) {
-        String uri = request.getRequestURI();
         loggerBean.log(BARS);
         loggerBean.log("[URI]: ");
         loggerBean.log("\t\t\t{}", request.getRequestURI());

@@ -29,7 +29,7 @@ public class RetryConfiguration {
         RetryTemplate retryTemplate = new RetryTemplate();
         retryTemplate.setBackOffPolicy(fixedBackOffPolicy);
         retryTemplate.setRetryPolicy(retryPolicy);
-        return null;
+        return retryTemplate;
     }
 
     @ConfigurationProperties(prefix = "springboot.side.retry-template")

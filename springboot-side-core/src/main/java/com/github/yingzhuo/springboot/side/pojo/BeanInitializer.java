@@ -1,5 +1,6 @@
 package com.github.yingzhuo.springboot.side.pojo;
 
+import java.util.Objects;
 import java.util.function.Function;
 
 @FunctionalInterface
@@ -12,10 +13,7 @@ public interface BeanInitializer<T> extends Function<T, T> {
     }
 
     default T checkPrecondition(T pojo) {
-        if (pojo == null) {
-            throw new NullPointerException("Cannot initialize null value.");
-        }
-        return pojo;
+        return Objects.requireNonNull(pojo, "Cannot initialize null value.");
     }
 
 }

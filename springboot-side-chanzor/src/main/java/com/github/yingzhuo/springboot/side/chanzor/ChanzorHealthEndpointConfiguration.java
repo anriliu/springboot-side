@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Bean;
 public class ChanzorHealthEndpointConfiguration {
 
     @Bean(name = "chanzor")
-    public HealthIndicator qiniuyunHealthIndicator(ChanzorManager chanzorService) {
+    public HealthIndicator chanzorHealthIndicator(ChanzorManager chanzorService) {
         return () -> {
             Health.Builder builder = new Health.Builder();
             try {

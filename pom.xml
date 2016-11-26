@@ -21,7 +21,7 @@
 
     <properties>
         <java.version>1.8</java.version>
-        <kotlin.version>1.0.3</kotlin.version>
+        <kotlin.version>1.0.5-2</kotlin.version>
         <encoding>UTF-8</encoding>
         <checkstyle>${basedir}/huawei_checks.xml</checkstyle>
         <springboot.version>1.4.2.RELEASE</springboot.version>

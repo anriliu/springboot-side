@@ -13,8 +13,6 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.util.Assert;
 
-import java.io.Serializable;
-
 @ConditionalOnClass(Connection.class)
 @EnableConfigurationProperties(SSH2Configuration.SSH2Properties.class)
 @ConditionalOnProperty(prefix = "springboot.side.ssh2", name = "enabled", havingValue = "true", matchIfMissing = true)
@@ -41,7 +39,7 @@ public class SSH2Configuration {
     }
 
     @ConfigurationProperties(prefix = "springboot.side.ssh2")
-    public static class SSH2Properties implements Serializable, InitializingBean {
+    public static class SSH2Properties implements InitializingBean {
 
         private boolean enabled = true;
         private Mode mode = Mode.GENERAL;
